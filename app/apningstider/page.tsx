@@ -214,7 +214,12 @@ export default function ApningstiderPage() {
       </div>
 
       <div className="mb-8">
-        <FollowUpChips label="Utforsk videre" chips={['Planlegg dagstur', 'Sammenlign alle parker', 'Parker for barn', 'Badeland i Norge']} />
+        <FollowUpChips label="Utforsk videre" chips={[
+          { text: 'Planlegg dagstur', href: '/planlegg-dagstur' },
+          { text: 'Sammenlign alle parker', href: '/sammenlign' },
+          { text: 'Parker for barn', href: '/guide/fornoyelsesparker-for-barn' },
+          { text: 'Badeland i Norge', href: '/guide/badeland-i-norge' },
+        ]} />
       </div>
 
       <RelatedLinks title="Relevante guider" links={[

@@ -118,9 +118,20 @@ export function SourceChips({ sources }: { sources: { letter: string; name: stri
   return <div className="flex flex-wrap gap-2">{sources.map((s, i) => <span key={i} className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px]" style={{ border: '1px solid var(--brd)', color: 'var(--ink2)' }}><span className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold" style={{ background: 'var(--brd)', color: 'var(--ink3)' }}>{s.letter}</span>{s.name}</span>)}</div>
 }
 
-/* ── FollowUpChips: "Spør videre" ── */
-export function FollowUpChips({ label, chips }: { label: string; chips: string[] }) {
-  return <div><p className="text-[12px] mb-2" style={{ color: 'var(--ink3)' }}>{label}</p><div className="flex flex-wrap gap-2">{chips.map((c, i) => <span key={i} className="rounded-full px-4 py-2 text-[13px]" style={{ border: '1px solid var(--brd)', color: 'var(--ink)', background: 'var(--card)' }}>{c}</span>)}</div></div>
+/* ── FollowUpChips: "Spør videre" – NOW WITH LINKS ── */
+export function FollowUpChips({ label, chips }: { label: string; chips: { text: string; href: string }[] }) {
+  return (
+    <div>
+      <p className="text-[12px] mb-2" style={{ color: 'var(--ink3)' }}>{label}</p>
+      <div className="flex flex-wrap gap-2">
+        {chips.map((c, i) => (
+          <Link key={i} href={c.href} className="rounded-full px-4 py-2 text-[13px] hover:underline" style={{ border: '1px solid var(--brd)', color: 'var(--ink)', background: 'var(--card)' }}>
+            {c.text}
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 /* ── ChatInput (now uses real search) ── */

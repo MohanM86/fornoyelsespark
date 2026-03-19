@@ -164,7 +164,12 @@ export default function PlanleggDagsturPage() {
       </div>
 
       <div className="mb-8">
-        <FollowUpChips label="Utforsk videre" chips={['Sammenlign alle parker', 'Sjekk åpningstider', 'Parker for barn', 'Badeland i Norge']} />
+        <FollowUpChips label="Utforsk videre" chips={[
+          { text: 'Sammenlign alle parker', href: '/sammenlign' },
+          { text: 'Sjekk åpningstider', href: '/apningstider' },
+          { text: 'Parker for barn', href: '/guide/fornoyelsesparker-for-barn' },
+          { text: 'Badeland i Norge', href: '/guide/badeland-i-norge' },
+        ]} />
       </div>
 
       <RelatedLinks title="Relevante guider" links={[

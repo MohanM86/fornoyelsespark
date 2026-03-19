@@ -75,7 +75,12 @@ export default function HomePage() {
       </div>
 
       <div className="mb-8">
-        <FollowUpChips label="Spør videre" chips={['Hva om det regner?', 'Vis overnatting i nærheten', 'Sammenlign med Dyreparken', 'Book billetter nå']} />
+        <FollowUpChips label="Spør videre" chips={[
+          { text: 'Hva om det regner?', href: '/guide/fornoyelsesparker-for-barn' },
+          { text: 'Sammenlign med Dyreparken', href: '/sammenlign' },
+          { text: 'Sjekk åpningstider', href: '/apningstider' },
+          { text: 'Planlegg dagstur', href: '/planlegg-dagstur' },
+        ]} />
       </div>
 
       {/* Featured parks – direct links for better crawl depth */}

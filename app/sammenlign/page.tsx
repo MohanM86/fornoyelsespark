@@ -175,7 +175,12 @@ export default function SammenlignPage() {
       </div>
 
       <div className="mb-8">
-        <FollowUpChips label="Utforsk videre" chips={['Planlegg dagstur', 'Sjekk åpningstider', 'Parker for barn', 'Badeland i Norge']} />
+        <FollowUpChips label="Utforsk videre" chips={[
+          { text: 'Planlegg dagstur', href: '/planlegg-dagstur' },
+          { text: 'Sjekk åpningstider', href: '/apningstider' },
+          { text: 'Parker for barn', href: '/guide/fornoyelsesparker-for-barn' },
+          { text: 'Badeland i Norge', href: '/guide/badeland-i-norge' },
+        ]} />
       </div>
 
       <RelatedLinks title="Relevante guider" links={[
