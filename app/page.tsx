@@ -1,183 +1,139 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { Section, ListingCard, ListingList, FAQ, RelatedLinks } from '@/components/UI'
-import { getFeaturedParks, getAllCities, getAllCategories, getAllGuides } from '@/lib/helpers'
+import {
+  Section, CompareCard, CompareGrid, AIInsightBox, SmartInsight,
+  FAQ, RelatedLinks, ChipNav, GuideCard, CityCard,
+} from '@/components/UI'
+import { getFeaturedParks, getAllParks, getAllCities, getAllCategories, getAllGuides, getParksByCity } from '@/lib/helpers'
 import { createFaqJsonLd } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Beste fornøyelsesparker i Norge – Komplett guide og oversikt',
-  description:
-    'Finn de beste fornøyelsesparkene, famileparkene, badelandene og aktivitetsparkene i Norge. Sammenlign parker, les guider og planlegg familieturen.',
+  description: 'Finn de beste fornøyelsesparkene, famileparkene, badelandene og aktivitetsparkene i Norge. Sammenlign parker, les guider og planlegg familieturen.',
   alternates: { canonical: '/' },
 }
 
 const homeFaq = [
-  {
-    question: 'Hva er den beste fornøyelsesparken i Norge?',
-    answer:
-      'De mest populære fornøyelsesparkene i Norge er TusenFryd (størst, nær Oslo), Dyreparken i Kristiansand (mest besøkt), Hunderfossen Eventyrpark (best for barn), Kongeparken (Vestlandet) og Bø Sommarland (største vannpark).',
-  },
-  {
-    question: 'Hvilke fornøyelsesparker passer best for barn?',
-    answer:
-      'Hunderfossen Eventyrpark og Lilleputthammer ved Lillehammer er spesielt tilpasset barn. Dyreparken i Kristiansand er også svært populær blant barnefamilier med Kardemomme by og Kaptein Sabeltanns Verden.',
-  },
-  {
-    question: 'Finnes det fornøyelsesparker som er åpne hele året?',
-    answer:
-      'De fleste utendørs fornøyelsesparker har sommersesong. Innendørs badeland og lekeland er åpne hele året. Dyreparken i Kristiansand har også julåpent om vinteren.',
-  },
-  {
-    question: 'Hva er forskjellen på en fornøyelsespark og en familiepark?',
-    answer:
-      'En fornøyelsespark fokuserer på mekaniske attraksjoner og berg-og-dal-baner, mens en familiepark har et bredere tilbud med aktiviteter tilpasset alle aldre, ofte med tematisk innhold. Mange parker er en kombinasjon av begge.',
-  },
-  {
-    question: 'Hvor finner man badeland i Norge?',
-    answer:
-      'Norge har badeland i de fleste større byer. De mest kjente er Bø Sommarland (Telemark), Nordlandsbadet (Bodø), Aquarama (Kristiansand) og Badelandet (Bergen).',
-  },
-  {
-    question: 'Hva koster det å besøke fornøyelsesparker i Norge?',
-    answer:
-      'Prisene varierer mellom 300 og 600 kroner per person, avhengig av park og sesong. De fleste parker tilbyr billigere billetter ved nettkjøp, og familiekort gir ytterligere rabatt.',
-  },
+  { question: 'Hva er den beste fornøyelsesparken i Norge?', answer: 'De mest populære fornøyelsesparkene i Norge er TusenFryd (størst, nær Oslo), Dyreparken i Kristiansand (mest besøkt), Hunderfossen Eventyrpark (best for barn), Kongeparken (Vestlandet) og Bø Sommarland (største vannpark).' },
+  { question: 'Hvilke fornøyelsesparker passer best for barn?', answer: 'Hunderfossen Eventyrpark og Lilleputthammer ved Lillehammer er spesielt tilpasset barn. Dyreparken i Kristiansand er også svært populær blant barnefamilier med Kardemomme by og Kaptein Sabeltanns Verden.' },
+  { question: 'Finnes det fornøyelsesparker som er åpne hele året?', answer: 'De fleste utendørs fornøyelsesparker har sommersesong. Innendørs badeland og lekeland er åpne hele året. Dyreparken i Kristiansand har også julåpent om vinteren.' },
+  { question: 'Hva er forskjellen på en fornøyelsespark og en familiepark?', answer: 'En fornøyelsespark fokuserer på mekaniske attraksjoner og berg-og-dal-baner, mens en familiepark har et bredere tilbud med aktiviteter tilpasset alle aldre, ofte med tematisk innhold.' },
+  { question: 'Hvor finner man badeland i Norge?', answer: 'Norge har badeland i de fleste større byer. De mest kjente er Bø Sommarland, Nordlandsbadet (Bodø), Aquarama (Kristiansand) og Badelandet (Bergen).' },
+  { question: 'Hva koster det å besøke fornøyelsesparker i Norge?', answer: 'Prisene varierer mellom 300 og 600 kroner per person, avhengig av park og sesong. De fleste parker tilbyr billigere billetter ved nettkjøp.' },
 ]
 
 export default function HomePage() {
   const featured = getFeaturedParks()
+  const allParks = getAllParks()
   const allCities = getAllCities()
   const allCategories = getAllCategories()
   const allGuides = getAllGuides()
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(homeFaq)) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(homeFaq)) }} />
 
       {/* Hero */}
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <header className="mb-8" style={{ animation: 'fadeUp 0.4s ease both' }}>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
           Beste fornøyelsesparker i Norge
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600">
-          Velkommen til Fornøyelsespark.no – Norges mest komplette guide til fornøyelsesparker,
-          familieparker, badeland og aktivitetsparker. Vi hjelper deg med å finne den beste parken
-          for din familie, enten du er ute etter berg-og-dal-baner, vannrutsjebaner eller rolige
-          opplevelser for de minste. Utforsk oversikten vår over parker i hele Norge, les guider og
-          planlegg neste familietur.
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          Komplett oversikt over {allParks.length}+ fornøyelsesparker, familieparker, badeland og opplevelser.
+          Sammenlign parker, finn den som passer din familie best, og planlegg neste tur.
         </p>
       </header>
 
-      {/* Featured parks */}
-      <Section title="Utvalgte fornøyelsesparker">
-        <p className="mb-4 text-sm text-gray-600">
-          Her er noen av de mest populære og best anmeldte fornøyelsesparkene og famileparkene i
-          Norge. Klikk deg videre for å lese mer om hver enkelt park.
-        </p>
-        <ListingList>
+      {/* AI Summary */}
+      <div style={{ animation: 'fadeUp 0.4s ease both', animationDelay: '0.05s' }}>
+        <AIInsightBox>
+          <p>
+            Norge har fem store fornøyelsesparker som skiller seg ut: <Link href="/park/tusenfryd" className="font-medium text-[var(--accent)] hover:underline">TusenFryd</Link> er
+            landets største med over 30 attraksjoner. <Link href="/park/dyreparken-kristiansand" className="font-medium text-[var(--accent)] hover:underline">Dyreparken i Kristiansand</Link> er
+            mest besøkt med nesten én million besøkende årlig. <Link href="/park/hunderfossen" className="font-medium text-[var(--accent)] hover:underline">Hunderfossen</Link> er
+            best for barn, <Link href="/park/kongeparken" className="font-medium text-[var(--accent)] hover:underline">Kongeparken</Link> dekker
+            Vestlandet, og <Link href="/park/bo-sommarland" className="font-medium text-[var(--accent)] hover:underline">Bø Sommarland</Link> er
+            Skandinavias største vannpark. De fleste har sesong fra mai til september.
+          </p>
+        </AIInsightBox>
+      </div>
+
+      {/* Smart Insights */}
+      <div className="mt-4 grid gap-2 sm:grid-cols-3" style={{ animation: 'fadeUp 0.4s ease both', animationDelay: '0.1s' }}>
+        <SmartInsight icon="✓" text="268 registrerte aktører" detail="Fra Brønnøysundregisteret" accent="blue" />
+        <SmartInsight icon="★" text="Sesong mai–september" detail="Innendørs er helårsåpne" accent="green" />
+        <SmartInsight icon="↗" text="Kjøp alltid på nett" detail="Spar 10–20% på billetter" accent="amber" />
+      </div>
+
+      {/* Category filters */}
+      <Section title="Utforsk etter type">
+        <ChipNav items={allCategories.map((c) => ({
+          label: c.name,
+          href: `/kategori/${c.slug}`,
+        }))} />
+      </Section>
+
+      {/* Featured parks as comparison cards */}
+      <Section title="Anbefalte parker" subtitle="De mest populære og best anmeldte parkene i Norge">
+        <CompareGrid>
           {featured.map((park) => (
-            <ListingCard
+            <CompareCard
               key={park.id}
               name={park.name}
               href={`/park/${park.slug}`}
               description={park.shortDescription}
               city={park.city}
+              county={park.county}
               category={park.category}
+              audience={park.audience}
               featured={park.featured}
+              tags={park.tags?.slice(0, 2)}
             />
           ))}
-        </ListingList>
+        </CompareGrid>
       </Section>
 
       {/* Cities */}
-      <Section title="Fornøyelsesparker etter by">
-        <p className="mb-4 text-sm text-gray-600">
-          Finn fornøyelsesparker og familieaktiviteter i nærheten av deg. Vi dekker de største byene
-          og regionene i Norge.
-        </p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <Section title="Parker etter by" subtitle="Finn opplevelser i nærheten av deg">
+        <div className="grid gap-2 sm:grid-cols-2">
           {allCities.map((city) => (
-            <Link
+            <CityCard
               key={city.slug}
+              name={city.name}
               href={`/${city.slug}`}
-              className="rounded-lg border border-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition-colors hover:border-brand-200 hover:bg-brand-50/30"
-            >
-              Fornøyelsesparker i {city.name}
-              <span className="ml-1 text-gray-400">→</span>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      {/* Categories */}
-      <Section title="Kategorier">
-        <p className="mb-4 text-sm text-gray-600">
-          Utforsk ulike typer parker og opplevelser. Fra tradisjonelle fornøyelsesparker til badeland
-          og naturopplevelser.
-        </p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {allCategories.map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/kategori/${cat.slug}`}
-              className="rounded-lg border border-gray-100 px-4 py-3 transition-colors hover:border-brand-200 hover:bg-brand-50/30"
-            >
-              <span className="text-sm font-medium text-gray-900">{cat.name}</span>
-              <p className="mt-1 text-xs text-gray-500 line-clamp-2">{cat.description}</p>
-            </Link>
+              parkCount={getParksByCity(city.slug).length}
+            />
           ))}
         </div>
       </Section>
 
       {/* Guides */}
-      <Section title="Guider og artikler">
-        <p className="mb-4 text-sm text-gray-600">
-          Les våre grundige guider for å finne riktig park for familien din. Vi dekker alt fra de
-          beste parkene i Norge til tips for reiser til Sverige og Danmark.
-        </p>
-        <div className="space-y-3">
+      <Section title="Guider og artikler" subtitle="Grundige gjennomganger for å finne riktig park">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {allGuides.map((guide) => (
-            <Link
-              key={guide.slug}
-              href={`/guide/${guide.slug}`}
-              className="block rounded-lg border border-gray-100 px-5 py-4 transition-colors hover:border-brand-200 hover:bg-brand-50/30"
-            >
-              <span className="text-sm font-medium text-gray-900">{guide.title}</span>
-              <p className="mt-1 text-xs text-gray-500 line-clamp-1">{guide.intro}</p>
-            </Link>
+            <GuideCard key={guide.slug} title={guide.title} intro={guide.intro} href={`/guide/${guide.slug}`} />
           ))}
         </div>
       </Section>
 
-      {/* About section for SEO */}
+      {/* About */}
       <Section title="Om Fornøyelsespark.no">
-        <div className="prose-sm text-sm leading-relaxed text-gray-600 space-y-3">
+        <div className="text-sm leading-relaxed space-y-3" style={{ color: 'var(--text-secondary)' }}>
           <p>
-            Fornøyelsespark.no er en uavhengig guide og oversiktstjeneste for fornøyelsesparker,
-            familieparker, badeland, vannparker og aktivitetsparker i Norge. Målet vårt er å gi deg
-            den informasjonen du trenger for å finne riktig park for din familie.
+            Fornøyelsespark.no er en uavhengig guide til fornøyelsesparker, familieparker, badeland,
+            vannparker og aktivitetsparker i Norge. Vi gir deg informasjonen du trenger for å finne
+            riktig park for din familie – uten reklame og uten betalte anbefalinger.
           </p>
           <p>
-            Vi dekker alt fra store nasjonale attraksjoner som TusenFryd og Dyreparken til lokale
-            lekeland og badeland i din by. Alle oppføringer inneholder praktisk informasjon,
-            beskrivelser og tips for å få mest mulig ut av besøket.
-          </p>
-          <p>
-            Norge har et overraskende rikt tilbud av fornøyelsesparker og familieopplevelser.
-            Enten du bor i Oslo, Bergen, Trondheim eller Nord-Norge, finnes det gode alternativer
-            for en morsom dag med familien. Vi oppdaterer siden jevnlig med ny informasjon og nye
-            oppføringer.
+            Alle oppføringer er basert på offentlige data fra Brønnøysundregisteret og redaksjonell
+            research. Vi dekker alt fra store nasjonale attraksjoner til lokale lekeland og badeland
+            i din by, med praktisk informasjon, sammenligninger og tips.
           </p>
         </div>
       </Section>
 
-      {/* FAQ */}
       <FAQ items={homeFaq} />
 
-      {/* Extra internal links */}
       <RelatedLinks
         title="Utforsk mer"
         links={[

@@ -1,14 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Section, FAQ, Breadcrumbs, RelatedLinks } from '@/components/UI'
-import {
-  getParkBySlug,
-  getAllParks,
-  getRelatedParks,
-  getRelatedGuides,
-  getCityBySlug,
-} from '@/lib/helpers'
+import { Section, QuickFacts, SmartInsight, FAQ, Breadcrumbs, RelatedLinks, CompareCard, CompareGrid, GuideCard } from '@/components/UI'
+import { getParkBySlug, getAllParks, getRelatedParks, getRelatedGuides, getCityBySlug } from '@/lib/helpers'
 import { createMetadata, createParkJsonLd, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
 
 type Props = { params: { slug: string } }
@@ -20,11 +14,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const park = getParkBySlug(params.slug)
   if (!park) return {}
-  return createMetadata({
-    title: `${park.name} – Informasjon, tips og praktisk guide`,
-    description: park.shortDescription,
-    path: `/park/${park.slug}`,
-  })
+  return createMetadata({ title: `${park.name} – Informasjon, tips og guide`, description: park.shortDescription, path: `/park/${park.slug}` })
 }
 
 export default function ParkPage({ params }: Props) {
@@ -43,114 +33,75 @@ export default function ParkPage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(createParkJsonLd(park)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(park.faq)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(breadcrumbs)) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createParkJsonLd(park)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(park.faq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(breadcrumbs)) }} />
 
-      <Breadcrumbs
-        items={[
-          { label: 'Forside', href: '/' },
-          ...(city ? [{ label: city.name, href: `/${city.slug}` }] : []),
-          { label: park.name },
-        ]}
-      />
+      <Breadcrumbs items={[
+        { label: 'Forside', href: '/' },
+        ...(city ? [{ label: city.name, href: `/${city.slug}` }] : []),
+        { label: park.name },
+      ]} />
 
       <article>
-        <header className="mb-8">
-          {park.featured && (
-            <span className="mb-2 inline-block rounded-full bg-brand-100 px-2.5 py-0.5 text-xs font-medium text-brand-800">
-              Anbefalt
-            </span>
-          )}
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">{park.name}</h1>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600">{park.shortDescription}</p>
-
-          {/* Quick facts */}
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
-            <div>
-              <span className="font-medium text-gray-800">Sted:</span>{' '}
-              {city ? (
-                <Link href={`/${city.slug}`} className="text-brand-700 hover:underline">
-                  {park.city}
-                </Link>
-              ) : (
-                park.city
-              )}
-              {park.county && `, ${park.county}`}
-            </div>
-            <div>
-              <span className="font-medium text-gray-800">Type:</span>{' '}
-              <Link
-                href={`/kategori/${park.category}`}
-                className="capitalize text-brand-700 hover:underline"
-              >
-                {park.category.replace(/-/g, ' ')}
-              </Link>
-            </div>
+        <header className="mb-6">
+          <div className="flex items-start gap-3 flex-wrap">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+              {park.name}
+            </h1>
+            {park.featured && (
+              <span className="mt-1 inline-block px-3 py-1 text-xs font-semibold rounded-full" style={{ background: 'var(--accent)', color: '#fff' }}>
+                Anbefalt
+              </span>
+            )}
           </div>
+          <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            {park.shortDescription}
+          </p>
         </header>
 
-        {/* Description */}
-        <Section title={`Om ${park.name}`}>
-          <div className="text-sm leading-relaxed text-gray-600 space-y-3">
-            {park.description.split('\n\n').map((p, i) => (
-              <p key={i}>{p}</p>
+        {/* Quick facts panel */}
+        <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--surface-raised)', border: '0.5px solid var(--border)' }}>
+          <QuickFacts facts={[
+            { label: 'Sted', value: city ? `${park.city}, ${park.county}` : park.city, href: city ? `/${city.slug}` : undefined },
+            { label: 'Type', value: park.category.charAt(0).toUpperCase() + park.category.slice(1).replace(/-/g, ' '), href: `/kategori/${park.category}` },
+            ...(park.address ? [{ label: 'Adresse', value: park.address }] : []),
+            { label: 'Passer for', value: park.audience.join(', ') },
+          ]} />
+        </div>
+
+        {/* Smart tips */}
+        {park.tips.length > 0 && (
+          <div className="grid gap-2 sm:grid-cols-2 mb-6">
+            {park.tips.slice(0, 4).map((tip, i) => (
+              <SmartInsight
+                key={i}
+                icon="✓"
+                text={tip}
+                accent={i % 3 === 0 ? 'blue' : i % 3 === 1 ? 'green' : 'amber'}
+              />
             ))}
+          </div>
+        )}
+
+        {/* Main description */}
+        <Section title={`Om ${park.name}`}>
+          <div className="text-sm leading-relaxed space-y-3" style={{ color: 'var(--text-secondary)' }}>
+            {park.description.split('\n\n').map((p, i) => <p key={i}>{p}</p>)}
           </div>
         </Section>
 
-        {/* Audience */}
+        {/* Audience tags */}
         {park.audience.length > 0 && (
           <Section title="Hvem passer det for?">
             <div className="flex flex-wrap gap-2">
               {park.audience.map((a) => (
-                <span
-                  key={a}
-                  className="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700"
-                >
+                <span key={a} className="rounded-full px-3.5 py-1.5 text-sm font-medium"
+                  style={{ background: 'var(--surface-sunken)', color: 'var(--text-secondary)', border: '0.5px solid var(--border)' }}>
                   {a}
                 </span>
               ))}
             </div>
-          </Section>
-        )}
-
-        {/* Address */}
-        {park.address && (
-          <Section title="Adresse og beliggenhet">
-            <p className="text-sm text-gray-600">{park.address}</p>
-            {city && (
-              <p className="mt-2 text-sm text-gray-600">
-                Se alle{' '}
-                <Link href={`/${city.slug}`} className="text-brand-700 hover:underline">
-                  fornøyelsesparker i {city.name}
-                </Link>
-                .
-              </p>
-            )}
-          </Section>
-        )}
-
-        {/* Tips */}
-        {park.tips.length > 0 && (
-          <Section title={`Tips før du besøker ${park.name}`}>
-            <ul className="space-y-2">
-              {park.tips.map((tip, i) => (
-                <li key={i} className="flex gap-2 text-sm text-gray-600">
-                  <span className="mt-0.5 flex-shrink-0 text-brand-600">✓</span>
-                  {tip}
-                </li>
-              ))}
-            </ul>
           </Section>
         )}
 
@@ -163,38 +114,39 @@ export default function ParkPage({ params }: Props) {
           }))}
         />
 
+        {/* City link */}
+        {city && (
+          <Section>
+            <Link href={`/${city.slug}`} className="flex items-center gap-2 rounded-xl p-4 transition-all hover:shadow-sm"
+              style={{ background: 'var(--surface-raised)', border: '0.5px solid var(--border)' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              <span className="text-sm font-medium" style={{ color: 'var(--accent)' }}>
+                Se alle fornøyelsesparker i {city.name}
+              </span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" className="ml-auto"><path d="M9 18l6-6-6-6" /></svg>
+            </Link>
+          </Section>
+        )}
+
         {/* Related parks */}
         {related.length > 0 && (
           <Section title="Lignende parker og opplevelser">
-            <div className="grid gap-3 sm:grid-cols-2">
+            <CompareGrid>
               {related.map((r) => (
-                <Link
-                  key={r.id}
-                  href={`/park/${r.slug}`}
-                  className="rounded-lg border border-gray-100 px-4 py-3 transition-colors hover:border-brand-200 hover:bg-brand-50/30"
-                >
-                  <span className="text-sm font-medium text-gray-900">{r.name}</span>
-                  <p className="mt-1 text-xs text-gray-500 line-clamp-2">
-                    {r.shortDescription}
-                  </p>
-                </Link>
+                <CompareCard key={r.id} name={r.name} href={`/park/${r.slug}`}
+                  description={r.shortDescription} city={r.city} category={r.category}
+                  tags={r.tags?.slice(0, 2)} />
               ))}
-            </div>
+            </CompareGrid>
           </Section>
         )}
 
         {/* Related guides */}
         {relatedGuides.length > 0 && (
           <Section title="Relevante guider">
-            <div className="space-y-2">
+            <div className="grid gap-3 sm:grid-cols-2">
               {relatedGuides.map((g) => (
-                <Link
-                  key={g.slug}
-                  href={`/guide/${g.slug}`}
-                  className="block rounded-lg border border-gray-100 px-4 py-3 text-sm font-medium text-gray-900 hover:border-brand-200 hover:bg-brand-50/30 transition-colors"
-                >
-                  {g.title} <span className="text-gray-400">→</span>
-                </Link>
+                <GuideCard key={g.slug} title={g.title} intro={g.intro} href={`/guide/${g.slug}`} />
               ))}
             </div>
           </Section>

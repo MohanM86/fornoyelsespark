@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Section, ListingCard, ListingList, FAQ, Breadcrumbs, RelatedLinks } from '@/components/UI'
+import { Section, CompareCard, CompareGrid, AIInsightBox, FAQ, Breadcrumbs, RelatedLinks, ChipNav, GuideCard } from '@/components/UI'
 import { getCityBySlug, getParksByCity, getAllCities, getAllCategories, getAllGuides } from '@/lib/helpers'
 import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
 
@@ -13,11 +13,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const city = getCityBySlug(params.city)
   if (!city) return {}
-  return createMetadata({
-    title: city.metaTitle,
-    description: city.metaDescription,
-    path: `/${city.slug}`,
-  })
+  return createMetadata({ title: city.metaTitle, description: city.metaDescription, path: `/${city.slug}` })
 }
 
 export default function CityPage({ params }: Props) {
@@ -26,92 +22,62 @@ export default function CityPage({ params }: Props) {
 
   const parks = getParksByCity(city.slug)
   const allCategories = getAllCategories()
-  const allCities = getAllCities().filter((c) => c.slug !== city.slug)
-  const allGuides = getAllGuides()
+  const otherCities = getAllCities().filter((c) => c.slug !== city.slug)
+  const guides = getAllGuides().slice(0, 3)
 
-  const breadcrumbs = [
-    { name: 'Forside', url: '/' },
-    { name: city.name, url: `/${city.slug}` },
-  ]
+  const breadcrumbs = [{ name: 'Forside', url: '/' }, { name: city.name, url: `/${city.slug}` }]
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(city.faq)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(breadcrumbs)) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(city.faq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(breadcrumbs)) }} />
 
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: city.name }]} />
 
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+      <header className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
           Fornøyelsesparker i {city.name}
         </h1>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-gray-600">{city.description}</p>
       </header>
 
-      {/* Parks in this city */}
+      <AIInsightBox>
+        <p>{city.description}</p>
+      </AIInsightBox>
+
+      <Section>
+        <ChipNav items={allCategories.map((c) => ({ label: c.name, href: `/kategori/${c.slug}` }))} />
+      </Section>
+
       {parks.length > 0 ? (
-        <Section title={`Parker og opplevelser i ${city.name}`}>
-          <ListingList>
+        <Section title={`${parks.length} parker og opplevelser i ${city.name}`}>
+          <CompareGrid>
             {parks.map((park) => (
-              <ListingCard
-                key={park.id}
-                name={park.name}
-                href={`/park/${park.slug}`}
-                description={park.shortDescription}
-                city={park.city}
-                category={park.category}
-                featured={park.featured}
+              <CompareCard
+                key={park.id} name={park.name} href={`/park/${park.slug}`}
+                description={park.shortDescription} city={park.city} county={park.county}
+                category={park.category} audience={park.audience} featured={park.featured}
+                tags={park.tags?.slice(0, 2)}
               />
             ))}
-          </ListingList>
+          </CompareGrid>
         </Section>
       ) : (
         <Section>
-          <p className="text-sm text-gray-600">
-            Vi jobber med å legge til flere oppføringer for {city.name}. Sjekk tilbake snart for
-            oppdatert informasjon om fornøyelsesparker og aktiviteter i området.
-          </p>
+          <div className="rounded-xl p-6 text-center" style={{ background: 'var(--surface-sunken)' }}>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              Vi jobber med å legge til oppføringer for {city.name}. Sjekk tilbake snart.
+            </p>
+          </div>
         </Section>
       )}
 
-      {/* Categories */}
-      <RelatedLinks
-        title="Utforsk kategorier"
-        links={allCategories.map((c) => ({
-          label: c.name,
-          href: `/kategori/${c.slug}`,
-        }))}
-      />
-
-      {/* Related guides */}
       <Section title="Relevante guider">
-        <div className="space-y-2">
-          {allGuides.slice(0, 4).map((g) => (
-            <a
-              key={g.slug}
-              href={`/guide/${g.slug}`}
-              className="block rounded-lg border border-gray-100 px-4 py-3 text-sm font-medium text-gray-900 hover:border-brand-200 hover:bg-brand-50/30 transition-colors"
-            >
-              {g.title} <span className="text-gray-400">→</span>
-            </a>
-          ))}
+        <div className="grid gap-3 sm:grid-cols-3">
+          {guides.map((g) => <GuideCard key={g.slug} title={g.title} intro={g.intro} href={`/guide/${g.slug}`} />)}
         </div>
       </Section>
 
-      {/* Other cities */}
-      <RelatedLinks
-        title="Andre byer"
-        links={allCities.slice(0, 8).map((c) => ({
-          label: c.name,
-          href: `/${c.slug}`,
-        }))}
-      />
+      <RelatedLinks title="Andre byer" links={otherCities.slice(0, 8).map((c) => ({ label: c.name, href: `/${c.slug}` }))} />
 
       <FAQ items={city.faq} />
     </>
