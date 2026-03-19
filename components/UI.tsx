@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
-/* Card wrapper matching screenshot style — white bg, subtle border, rounded */
-function Card({ children, className, accent }: { children: React.ReactNode; className?: string; accent?: boolean }) {
+/* Card wrapper — white bg, thin gray border, rounded */
+function Card({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={className} style={{
       background: 'var(--card)',
-      border: accent ? '1.5px solid var(--green)' : '1px solid var(--border)',
+      border: '1px solid var(--border)',
       borderRadius: 12,
     }}>
       {children}
@@ -23,39 +23,39 @@ export function Section({ title, children, id }: { title?: string; children: Rea
   )
 }
 
-/* ── ParkCard — the white rounded card from screenshots ── */
+/* ── ParkCard — white card, thin gray border, small badge ── */
 export function ParkCard({ name, href, description, city, county, category, featured, audience, tags }: {
   name: string; href: string; description: string; city?: string; county?: string
   category?: string; featured?: boolean; audience?: string[]; tags?: string[]
 }) {
   return (
-    <Card accent={featured} className="p-4 relative">
+    <Card className="p-4 relative">
       {featured && (
-        <span className="absolute -top-2.5 left-3 px-2.5 py-0.5 text-[11px] font-semibold rounded-full"
+        <span className="absolute -top-2 left-3 px-2 py-px text-[10px] font-semibold rounded-full"
           style={{ background: 'var(--green)', color: '#fff' }}>Anbefalt</span>
       )}
-      <Link href={href} className="text-[15px] font-bold hover:underline" style={{ color: 'var(--ink)' }}>{name}</Link>
+      <Link href={href} className="text-[15px] font-bold hover:underline block" style={{ color: 'var(--ink)' }}>{name}</Link>
       <div className="mt-1 flex flex-wrap gap-x-2 text-xs" style={{ color: 'var(--ink-muted)' }}>
         {city && <span>{city}{county ? `, ${county}` : ''}</span>}
         {category && <><span>·</span><span className="capitalize">{category.replace(/-/g, ' ')}</span></>}
       </div>
-      <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: 'var(--ink-light)' }}>{description}</p>
+      <p className="mt-2 text-[13px] leading-relaxed line-clamp-2" style={{ color: 'var(--ink-light)' }}>{description}</p>
       {audience && audience.length > 0 && (
-        <div className="mt-2.5 flex flex-wrap gap-1.5">
+        <div className="mt-3 flex flex-wrap gap-1.5">
           {audience.slice(0, 3).map(a => (
-            <span key={a} className="rounded-full px-2 py-0.5 text-[11px]"
-              style={{ background: 'var(--cream-dark)', color: 'var(--ink-muted)' }}>{a}</span>
+            <span key={a} className="rounded-full px-2.5 py-0.5 text-[11px]"
+              style={{ border: '1px solid var(--border)', color: 'var(--ink-muted)' }}>{a}</span>
           ))}
         </div>
       )}
-      <Link href={href} className="mt-2.5 inline-block text-xs font-semibold" style={{ color: 'var(--blue)' }}>Les mer →</Link>
+      <Link href={href} className="mt-3 inline-block text-[13px] font-semibold" style={{ color: 'var(--blue)' }}>Les mer →</Link>
     </Card>
   )
 }
 
 /* ── ParkGrid ── */
 export function ParkGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid gap-3 sm:grid-cols-2">{children}</div>
+  return <div className="grid gap-4 sm:grid-cols-2">{children}</div>
 }
 
 /* ── InfoBox — colored insight boxes matching green/yellow/red bars from screenshot ── */
