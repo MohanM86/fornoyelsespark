@@ -123,16 +123,8 @@ export function FollowUpChips({ label, chips }: { label: string; chips: string[]
   return <div><p className="text-[12px] mb-2" style={{ color: 'var(--ink3)' }}>{label}</p><div className="flex flex-wrap gap-2">{chips.map((c, i) => <span key={i} className="rounded-full px-4 py-2 text-[13px]" style={{ border: '1px solid var(--brd)', color: 'var(--ink)', background: 'var(--card)' }}>{c}</span>)}</div></div>
 }
 
-/* ── ChatInput ── */
-export function ChatInput({ placeholder }: { placeholder: string }) {
-  return (
-    <div className="flex items-center gap-3 rounded-full px-5 py-3" style={{ background: 'var(--card)', border: '1px solid var(--brd)' }}>
-      <span className="flex-1 text-[14px]" style={{ color: 'var(--ink3)' }}>{placeholder}</span>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink4)" strokeWidth="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink4)" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    </div>
-  )
-}
+/* ── ChatInput (now uses real search) ── */
+export { InlineSearch as ChatInput } from '@/components/Search'
 
 /* ── QuickFacts ── */
 export function QuickFacts({ facts }: { facts: { label: string; value: string; href?: string }[] }) {

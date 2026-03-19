@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useState } from 'react'
+import { HeaderSearch } from '@/components/Search'
 
 const nav = [
   { label: 'Parker', href: '/kategori/fornoyelsesparker' },
@@ -18,12 +19,7 @@ export default function Header() {
           Fornøyelsespark<span style={{ color: 'var(--green)' }}>.no</span>
         </Link>
         <div className="flex-1 mx-1">
-          <div className="flex items-center gap-2 rounded-full px-4 py-2 text-[13px]"
-            style={{ background: 'var(--card)', border: '1px solid var(--brd)', color: 'var(--ink3)' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <span className="hidden sm:inline">Søk etter parker, byer eller opplevelser...</span>
-            <span className="sm:hidden">Søk...</span>
-          </div>
+          <HeaderSearch />
         </div>
         <nav className="hidden sm:flex items-center gap-1">
           {nav.map(n => (
