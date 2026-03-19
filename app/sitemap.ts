@@ -8,6 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${BASE}/planlegg-dagstur`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/sammenlign`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/apningstider`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
   ]
 
   const cityPages: MetadataRoute.Sitemap = getAllCities().map(c => ({
