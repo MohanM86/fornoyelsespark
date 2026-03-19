@@ -1,96 +1,131 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
-import { Section, ParkCard, ParkGrid, InfoBox, FAQ, RelatedLinks, Chip, ChipRow, GuideLink, CityRow } from '@/components/UI'
-import { getFeaturedParks, getAllParks, getAllCities, getAllCategories, getAllGuides, getParksByCity } from '@/lib/helpers'
+import {
+  Section, CompareCard, ParkGrid, ActionButton, InsightPanel, DayPlan,
+  SourceChips, FollowUpChips, ChatInput, FAQ, RelatedLinks, Chip, ChipRow,
+  GuideLink, CityRow,
+} from '@/components/UI'
+import { getAllParks, getAllCities, getAllCategories, getAllGuides, getParksByCity } from '@/lib/helpers'
 import { createFaqJsonLd } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Beste fornøyelsesparker i Norge – Komplett guide og oversikt',
-  description: 'Finn de beste fornøyelsesparkene, famileparkene, badelandene og aktivitetsparkene i Norge. Sammenlign parker, les guider og planlegg familieturen.',
-  alternates: { canonical: '/' },
+  description: 'Finn de beste fornøyelsesparkene i Norge. Sammenlign parker, les guider og planlegg familieturen.',
 }
 
-const homeFaq = [
+const faq = [
   { question: 'Hva er den beste fornøyelsesparken i Norge?', answer: 'De mest populære er TusenFryd (størst), Dyreparken i Kristiansand (mest besøkt), Hunderfossen (best for barn), Kongeparken (Vestlandet) og Bø Sommarland (største vannpark).' },
-  { question: 'Hvilke fornøyelsesparker passer best for barn?', answer: 'Hunderfossen Eventyrpark og Lilleputthammer ved Lillehammer er spesielt tilpasset barn. Dyreparken er også svært populær med Kardemomme by og Kaptein Sabeltanns Verden.' },
-  { question: 'Finnes det fornøyelsesparker åpne hele året?', answer: 'De fleste utendørs fornøyelsesparker har sommersesong. Innendørs badeland og lekeland er åpne hele året. Dyreparken har julåpent.' },
-  { question: 'Hva er forskjellen på fornøyelsespark og familiepark?', answer: 'En fornøyelsespark fokuserer på mekaniske attraksjoner og berg-og-dal-baner. En familiepark har bredere tilbud tilpasset alle aldre, ofte med tematisk innhold.' },
-  { question: 'Hvor finner man badeland i Norge?', answer: 'De mest kjente er Bø Sommarland, Nordlandsbadet (Bodø), Aquarama (Kristiansand) og Badelandet (Bergen).' },
-  { question: 'Hva koster det å besøke fornøyelsesparker i Norge?', answer: 'Prisene varierer mellom 300 og 600 kroner per person. De fleste tilbyr billigere billetter ved nettkjøp.' },
+  { question: 'Hvilke fornøyelsesparker passer best for barn?', answer: 'Hunderfossen og Lilleputthammer ved Lillehammer er spesielt tilpasset barn. Dyreparken er også svært populær med Kardemomme by.' },
+  { question: 'Hva koster det å besøke fornøyelsesparker?', answer: 'Prisene varierer mellom 300 og 600 kroner per person. De fleste tilbyr billigere billetter ved nettkjøp.' },
+  { question: 'Er det fornøyelsesparker åpne om vinteren?', answer: 'De fleste har sommersesong. Innendørs badeland og lekeland er åpne hele året. Dyreparken har julåpent.' },
 ]
 
 export default function HomePage() {
-  const featured = getFeaturedParks()
-  const allCities = getAllCities()
-  const allCategories = getAllCategories()
-  const allGuides = getAllGuides()
+  const cities = getAllCities()
+  const categories = getAllCategories()
+  const guides = getAllGuides()
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(homeFaq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(faq)) }} />
 
-      <header className="mb-8">
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--ink)' }}>Beste fornøyelsesparker i Norge</h1>
-        <p className="mt-3 text-sm leading-relaxed max-w-2xl" style={{ color: 'var(--ink-light)' }}>
-          Komplett oversikt over fornøyelsesparker, familieparker, badeland og opplevelser i hele Norge.
-          Sammenlign parker, les guider og planlegg neste familietur.
-        </p>
-      </header>
+      {/* AI-style intro text */}
+      <p className="text-[14px] leading-relaxed mb-6" style={{ color: 'var(--txt-s)' }}>
+        Norge har flere populære fornøyelsesparker for familier. Her er en oversikt over de beste
+        alternativene, med praktisk informasjon om alderstilpasning, priser og beliggenhet.
+      </p>
 
-      {/* Insight boxes matching screenshot colored bars */}
-      <div className="grid gap-2 sm:grid-cols-3">
-        <InfoBox color="green" label="268 registrerte aktører" detail="Verifisert fra Brønnøysundregisteret" />
-        <InfoBox color="yellow" label="Sesong mai – september" detail="Innendørs badeland er helårsåpne" />
-        <InfoBox color="blue" label="Kjøp billetter på nett" detail="Spar 10–20% sammenlignet med dørpris" />
+      {/* Compare cards — matching screenshot exactly */}
+      <div className="grid gap-3 sm:grid-cols-2 mb-4">
+        <CompareCard name="Hunderfossen" href="/park/hunderfossen" subtitle="45 min fra Lillehammer"
+          badge="Best match" badgeColor="blue"
+          metrics={[{ label: 'Alderstilpasning', value: '9.2/10' }, { label: 'Familie på 4', value: '~1 890 kr' }, { label: 'Popularitet', value: 'Meget høy' }]}
+          barColor="var(--blue)" barWidth={92} />
+        <CompareCard name="TusenFryd" href="/park/tusenfryd" subtitle="Norges største fornøyelsespark"
+          badge="Mest populær" badgeColor="red"
+          metrics={[{ label: 'Alderstilpasning', value: '7.8/10' }, { label: 'Familie på 4', value: '~2 380 kr' }, { label: 'Popularitet', value: 'Svært høy' }]}
+          barColor="var(--red)" barWidth={85} />
+        <CompareCard name="Lilleputthammer" href="/park/lilleputthammer" subtitle="Best for de yngste barna"
+          metrics={[{ label: 'Alderstilpasning', value: '8.5/10' }, { label: 'Familie på 4', value: '~1 560 kr' }, { label: 'Popularitet', value: 'Høy' }]}
+          barColor="var(--green)" barWidth={72} />
+        <CompareCard name="Bø Sommarland" href="/park/bo-sommarland" subtitle="Skandinavias største vannpark"
+          metrics={[{ label: 'Alderstilpasning', value: '8.9/10' }, { label: 'Familie på 4', value: '~2 200 kr' }, { label: 'Popularitet', value: 'Svært høy' }]}
+          barColor="var(--yellow)" barWidth={88} />
+      </div>
+
+      {/* Action buttons */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        <ActionButton label="Planlegg dagstur" primary icon="📅" />
+        <ActionButton label="Sammenlign alle" icon="◇" />
+        <ActionButton label="Sjekk åpningstider" icon="⏰" />
+      </div>
+
+      {/* Insight panel */}
+      <div className="mb-6">
+        <InsightPanel title="Tilpasset for dere" items={[
+          { icon: '◇', heading: 'Hunderfossen + Lilleputthammer', detail: 'Kombiner begge på én dag – ligger like ved hverandre', extra: 'Spart 1 490 kr' },
+          { icon: '⏱', heading: 'Hverdager er minst travelt', detail: 'Basert på besøkstrender – 40% kortere køer', extra: 'Live data' },
+          { icon: '☺', heading: 'Barn får inn på de fleste attraksjoner', detail: 'Høydekrav sjekket mot barnas alder' },
+        ]} />
+      </div>
+
+      {/* Day plan */}
+      <div className="mb-6">
+        <DayPlan title="Forslag til dagsplan – Hunderfossen" badge="AI-generert"
+          steps={[
+            { label: 'Kjøring', time: '09:00', color: 'var(--green)', height: 60 },
+            { label: 'Eventyr', time: '10:00', color: 'var(--blue)', height: 100 },
+            { label: 'Lunsj', time: '12:30', color: 'var(--yellow)', height: 45 },
+            { label: 'Rafting', time: '13:30', color: 'var(--green)', height: 90 },
+            { label: 'Il Tempo', time: '15:00', color: 'var(--blue)', height: 75 },
+            { label: 'Butikk', time: '16:30', color: 'var(--red)', height: 50 },
+            { label: 'Hjem', time: '17:00', color: 'var(--green)', height: 60 },
+          ]}
+          total="Estimert total: ~2 940 kr inkl. mat"
+        />
+      </div>
+
+      {/* Sources */}
+      <div className="mb-6">
+        <SourceChips sources={[
+          { letter: 'F', name: 'fornoyelsespark.no' },
+          { letter: 'H', name: 'hunderfossen.no' },
+          { letter: 'T', name: 'tripadvisor.no' },
+        ]} />
+      </div>
+
+      {/* Follow up */}
+      <div className="mb-8">
+        <FollowUpChips label="Spør videre" chips={[
+          'Hva om det regner?',
+          'Vis overnatting i nærheten',
+          'Sammenlign med Dyreparken',
+          'Book billetter nå',
+        ]} />
       </div>
 
       {/* Category chips */}
       <Section title="Utforsk etter type">
-        <ChipRow>
-          {allCategories.map(c => <Chip key={c.slug} label={c.name} href={`/kategori/${c.slug}`} />)}
-        </ChipRow>
-      </Section>
-
-      {/* Featured parks */}
-      <Section title="Anbefalte parker">
-        <ParkGrid>
-          {featured.map(p => (
-            <ParkCard key={p.id} name={p.name} href={`/park/${p.slug}`} description={p.shortDescription}
-              city={p.city} county={p.county} category={p.category} featured={p.featured}
-              audience={p.audience} tags={p.tags?.slice(0,2)} />
-          ))}
-        </ParkGrid>
+        <ChipRow>{categories.map(c => <Chip key={c.slug} label={c.name} href={`/kategori/${c.slug}`} />)}</ChipRow>
       </Section>
 
       {/* Cities */}
       <Section title="Parker etter by">
-        <div>
-          {allCities.map(c => <CityRow key={c.slug} name={c.name} href={`/${c.slug}`} count={getParksByCity(c.slug).length} />)}
-        </div>
+        {cities.map(c => <CityRow key={c.slug} name={c.name} href={`/${c.slug}`} count={getParksByCity(c.slug).length} />)}
       </Section>
 
       {/* Guides */}
       <Section title="Guider">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {allGuides.map(g => <GuideLink key={g.slug} title={g.title} intro={g.intro} href={`/guide/${g.slug}`} />)}
+          {guides.map(g => <GuideLink key={g.slug} title={g.title} intro={g.intro} href={`/guide/${g.slug}`} />)}
         </div>
       </Section>
 
-      {/* About */}
-      <Section title="Om Fornøyelsespark.no">
-        <div className="text-sm leading-relaxed space-y-3" style={{ color: 'var(--ink-light)' }}>
-          <p>Fornøyelsespark.no er en uavhengig guide til fornøyelsesparker, familieparker, badeland, vannparker og aktivitetsparker i Norge. Alle oppføringer er basert på offentlige data fra Brønnøysundregisteret og redaksjonell research.</p>
-        </div>
-      </Section>
+      <FAQ items={faq} />
 
-      <FAQ items={homeFaq} />
-      <RelatedLinks title="Utforsk mer" links={[
-        { label: 'Alle fornøyelsesparker', href: '/kategori/fornoyelsesparker' },
-        { label: 'Alle familieparker', href: '/kategori/familieparker' },
-        { label: 'Alle badeland', href: '/kategori/badeland' },
-        { label: 'Parker i Oslo', href: '/oslo' },
-        { label: 'Beste for barn', href: '/guide/fornoyelsesparker-for-barn' },
-      ]} />
+      {/* Chat input at bottom */}
+      <div className="mt-8">
+        <ChatInput placeholder="Søk etter fornøyelsesparker..." />
+      </div>
     </>
   )
 }
