@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 const SITE_NAME = 'Fornøyelsespark.no'
-const SITE_URL = 'https://fornoyelsespark.no'
+const SITE_URL = 'https://fornøyelsespark.no'
 
 export function createMetadata(opts: {
   title: string
