@@ -16,6 +16,13 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker',
     description: 'Finn de beste fornøyelsesparkene, famileparkene og badelandene i Norge.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker',
+    description: 'Finn de beste fornøyelsesparkene, famileparkene og badelandene i Norge.',
+    images: ['/og-image.png'],
   },
 }
 
