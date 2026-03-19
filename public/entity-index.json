@@ -1,0 +1,49 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Fornøyelsespark.no",
+  "url": "https://fornoyelsespark.no",
+  "description": "Norges mest komplette guide til fornøyelsesparker, familieparker, badeland og aktivitetsparker",
+  "inLanguage": "nb",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fornøyelsespark.no"
+  },
+  "mainEntity": [
+    {
+      "@type": "AmusementPark",
+      "name": "TusenFryd",
+      "description": "Norges største fornøyelsespark med over 30 attraksjoner",
+      "address": "Høyungsletta 19, 1407 Vinterbro",
+      "url": "https://fornoyelsespark.no/park/tusenfryd"
+    },
+    {
+      "@type": "AmusementPark",
+      "name": "Dyreparken i Kristiansand",
+      "description": "Norges mest besøkte familiepark med dyrehage, Kardemomme by og Kaptein Sabeltanns Verden",
+      "address": "Kardemomme by 4609 Kristiansand",
+      "url": "https://fornoyelsespark.no/park/dyreparken-kristiansand"
+    },
+    {
+      "@type": "AmusementPark",
+      "name": "Hunderfossen Eventyrpark",
+      "description": "Familiepark ved Lillehammer bygget rundt norske folkeeventyr",
+      "address": "Fåbergvegen 612, 2625 Fåberg",
+      "url": "https://fornoyelsespark.no/park/hunderfossen"
+    },
+    {
+      "@type": "AmusementPark",
+      "name": "Kongeparken",
+      "description": "Sør-Vestlandets største familiepark ved Stavanger",
+      "address": "Ålgårdsveien 150, 4330 Ålgård",
+      "url": "https://fornoyelsespark.no/park/kongeparken"
+    },
+    {
+      "@type": "AmusementPark",
+      "name": "Bø Sommarland",
+      "description": "Norges og Skandinavias største vannpark med over 100 vannattraksjoner",
+      "address": "Lundedalen, 3800 Bø i Telemark",
+      "url": "https://fornoyelsespark.no/park/bo-sommarland"
+    }
+  ]
+}
