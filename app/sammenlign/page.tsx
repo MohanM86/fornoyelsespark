@@ -153,11 +153,11 @@ export default function SammenlignPage() {
       <Section title="Avstand fra storbyer">
         <div className="rounded-xl overflow-hidden" style={{ background: 'var(--card)', border: '1px solid var(--brd)' }}>
           {[
-            { park: 'TusenFryd', oslo: '20 min', bergen: '7 t', trondheim: '5.5 t', stavanger: '6 t' },
-            { park: 'Hunderfossen', oslo: '2.5 t', bergen: '7 t', trondheim: '4 t', stavanger: '7.5 t' },
-            { park: 'Dyreparken', oslo: '3.5 t', bergen: '5.5 t', trondheim: '8 t', stavanger: '4 t' },
-            { park: 'Kongeparken', oslo: '6 t', bergen: '4.5 t', trondheim: '10 t', stavanger: '30 min' },
-            { park: 'Bø Sommarland', oslo: '2 t', bergen: '7 t', trondheim: '6 t', stavanger: '5 t' },
+            { park: 'TusenFryd', oslo: '20 min', bergen: '7 t', trondheim: '6 t', stavanger: '7.5 t' },
+            { park: 'Hunderfossen', oslo: '2.5 t', bergen: '6.5 t', trondheim: '4.5 t', stavanger: '8 t' },
+            { park: 'Dyreparken', oslo: '3.5 t', bergen: '5 t', trondheim: '8.5 t', stavanger: '2.5 t' },
+            { park: 'Kongeparken', oslo: '5.5 t', bergen: '5 t', trondheim: '12 t', stavanger: '25 min' },
+            { park: 'Bø Sommarland', oslo: '2 t 15 min', bergen: '5.5 t', trondheim: '8.5 t', stavanger: '4.5 t' },
           ].map((p, i) => (
             <div key={p.park} className="grid grid-cols-5 gap-2 px-4 py-3 text-[12px]" style={{ borderTop: i > 0 ? '1px solid var(--brd)' : 'none' }}>
               <span className="font-semibold text-[13px]" style={{ color: 'var(--ink)' }}>{p.park}</span>
