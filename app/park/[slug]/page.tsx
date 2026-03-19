@@ -3,13 +3,18 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Section, QuickFacts, InsightPanel, FAQ, Breadcrumbs, RelatedLinks, ParkCard, ParkGrid, GuideLink, ChatInput } from '@/components/UI'
 import { getParkBySlug, getAllParks, getRelatedParks, getRelatedGuides, getCityBySlug } from '@/lib/helpers'
-import { createMetadata, createParkJsonLd, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
+import { createMetadata, createParkJsonLd, createLocalBusinessJsonLd, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
 
 type Props = { params: { slug: string } }
 export function generateStaticParams() { return getAllParks().map(p => ({ slug: p.slug })) }
 export function generateMetadata({ params }: Props): Metadata {
   const park = getParkBySlug(params.slug); if (!park) return {}
-  return createMetadata({ title: `${park.name} – Informasjon og guide`, description: park.shortDescription, path: `/park/${park.slug}` })
+  const catName = park.category.charAt(0).toUpperCase() + park.category.slice(1).replace(/-/g, ' ')
+  return createMetadata({
+    title: `${park.name} – ${catName} i ${park.city} | Guide og informasjon`,
+    description: `${park.name} i ${park.city}, ${park.county}. ${park.shortDescription.slice(0, 140)}`,
+    path: `/park/${park.slug}`,
+  })
 }
 export default function ParkPage({ params }: Props) {
   const park = getParkBySlug(params.slug); if (!park) notFound()
@@ -19,8 +24,10 @@ export default function ParkPage({ params }: Props) {
   const bc = [{ name: 'Forside', url: '/' }, ...(city ? [{ name: city.name, url: `/${city.slug}` }] : []), { name: park.name, url: `/park/${park.slug}` }]
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createParkJsonLd(park)) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(park.faq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(
+        park.featured ? createParkJsonLd(park) : createLocalBusinessJsonLd({ name: park.name, description: park.shortDescription, address: park.address, city: park.city, county: park.county, slug: park.slug, category: park.category })
+      ) }} />
+      {park.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(park.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(bc)) }} />
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, ...(city ? [{ label: city.name, href: `/${city.slug}` }] : []), { label: park.name }]} />
       <article>

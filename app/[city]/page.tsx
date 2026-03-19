@@ -16,7 +16,7 @@ export default function CityPage({ params }: Props) {
   const others = getAllCities().filter(c => c.slug !== city.slug)
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(city.faq)) }} />
+      {city.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(city.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd([{ name: 'Forside', url: '/' }, { name: city.name, url: `/${city.slug}` }])) }} />
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: city.name }]} />
       <h1 className="text-xl font-bold mb-2" style={{ color: 'var(--ink)' }}>Fornøyelsesparker i {city.name}</h1>

@@ -7,7 +7,8 @@
   "inLanguage": "nb",
   "publisher": {
     "@type": "Organization",
-    "name": "Fornøyelsespark.no"
+    "name": "Fornøyelsespark.no",
+    "url": "https://fornoyelsespark.no"
   },
   "mainEntity": [
     {
@@ -45,5 +46,14 @@
       "address": "Lundedalen, 3800 Bø i Telemark",
       "url": "https://fornoyelsespark.no/park/bo-sommarland"
     }
+  ],
+  "about": [
+    { "@type": "Thing", "name": "Fornøyelsesparker i Norge" },
+    { "@type": "Thing", "name": "Familieparker i Norge" },
+    { "@type": "Thing", "name": "Badeland i Norge" },
+    { "@type": "Thing", "name": "Vannparker i Norge" },
+    { "@type": "Thing", "name": "Aktivitetsparker i Norge" },
+    { "@type": "Thing", "name": "Opplevelsesparker i Norge" },
+    { "@type": "Thing", "name": "Dyreparker i Norge" }
   ]
 }

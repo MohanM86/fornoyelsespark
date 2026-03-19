@@ -1,31 +1,35 @@
 import { parks } from '@/data/parks'
+import { brregParks } from '@/data/brreg'
 import { cities } from '@/data/cities'
 import { categories } from '@/data/categories'
 import { guides } from '@/data/guides'
 import { Park, City, Category, Guide, ParkCategory } from '@/lib/types'
 
+// Merge: manual parks first (featured, detailed), then brreg entries
+const allParks: Park[] = [...parks, ...brregParks]
+
 export function getAllParks(): Park[] {
-  return parks
+  return allParks
 }
 
 export function getParkBySlug(slug: string): Park | undefined {
-  return parks.find((p) => p.slug === slug)
+  return allParks.find((p) => p.slug === slug)
 }
 
 export function getFeaturedParks(): Park[] {
-  return parks.filter((p) => p.featured)
+  return allParks.filter((p) => p.featured)
 }
 
 export function getParksByCity(citySlug: string): Park[] {
-  return parks.filter((p) => p.citySlug === citySlug)
+  return allParks.filter((p) => p.citySlug === citySlug)
 }
 
 export function getParksByCategory(categorySlug: ParkCategory): Park[] {
-  return parks.filter((p) => p.categories.includes(categorySlug))
+  return allParks.filter((p) => p.categories.includes(categorySlug))
 }
 
 export function getRelatedParks(park: Park, limit = 4): Park[] {
-  return parks
+  return allParks
     .filter(
       (p) =>
         p.id !== park.id &&

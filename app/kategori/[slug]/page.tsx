@@ -18,7 +18,7 @@ export default function CategoryPage({ params }: Props) {
   const guides = getAllGuides().filter(g => g.slug.includes(cat.slug) || g.relatedParks.some(rp => parks.some(p => p.slug === rp)))
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(cat.faq)) }} />
+      {cat.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(cat.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd([{ name: 'Forside', url: '/' }, { name: cat.name, url: `/kategori/${cat.slug}` }])) }} />
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: cat.name }]} />
       <h1 className="text-xl font-bold mb-2" style={{ color: 'var(--ink)' }}>{cat.name} i Norge</h1>

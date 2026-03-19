@@ -16,7 +16,7 @@ export default function GuidePage({ params }: Props) {
   const related = guide.relatedGuides.map(s => getGuideBySlug(s)).filter(Boolean)
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(guide.faq)) }} />
+      {guide.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(guide.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd([{ name: 'Forside', url: '/' }, { name: 'Guider', url: '/guide/beste-fornoyelsesparker-i-norge' }, { name: guide.title, url: `/guide/${guide.slug}` }])) }} />
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: 'Guider', href: '/guide/beste-fornoyelsesparker-i-norge' }, { label: guide.title }]} />
       <h1 className="text-xl font-bold mb-2" style={{ color: 'var(--ink)' }}>{guide.title}</h1>

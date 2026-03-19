@@ -2,28 +2,28 @@
 
 > Norges mest komplette guide til fornøyelsesparker, familieparker, badeland, vannparker og aktivitetsparker.
 
-Fornøyelsespark.no er en uavhengig informasjonsportal som dekker fornøyelsesparker og familieopplevelser i Norge. Portalen inneholder detaljerte beskrivelser av parker, bysider, kategorisider og guider.
+Fornøyelsespark.no er en uavhengig informasjonsportal som dekker fornøyelsesparker og familieopplevelser i Norge. Alle oppføringer er kvalitetssikret mot norske næringsregistre.
 
 ## Innhold
 
-- Detaljsider for over 20 fornøyelsesparker og opplevelser i Norge
-- Bysider for 11 norske byer med lokale oversikter
-- 7 kategorisider: fornøyelsesparker, familieparker, badeland, vannparker, aktivitetsparker, opplevelsesparker, dyreparker
+- Detaljsider for over 280 fornøyelsesparker og opplevelser i Norge
+- Bysider for norske byer med lokale oversikter
+- 7 kategorisider
 - 6 grundige guider med sammenligninger og anbefalinger
 - FAQ-seksjoner på alle sider
 
 ## Nøkkelfakta
 
 - De største fornøyelsesparkene i Norge: TusenFryd, Dyreparken i Kristiansand, Hunderfossen, Kongeparken, Bø Sommarland
-- Norges mest besøkte familiepark: Dyreparken i Kristiansand (ca. 1 million besøkende årlig)
-- Norges største fornøyelsespark: TusenFryd (over 30 attraksjoner)
-- Norges største vannpark: Bø Sommarland (over 100 vannattraksjoner)
+- Norges mest besøkte familiepark: Dyreparken i Kristiansand
+- Norges største fornøyelsespark: TusenFryd
+- Norges største vannpark: Bø Sommarland
 - De fleste parker har sesong fra mai til september
 
 ## Sidestruktur
 
-- / – Forside med oversikt
-- /[by] – Bysider (Oslo, Bergen, Trondheim, Stavanger, Kristiansand, m.fl.)
+- / – Forside med oversikt og sammenligning
+- /[by] – Bysider
 - /kategori/[slug] – Kategorisider
 - /park/[slug] – Detaljsider for parker
 - /guide/[slug] – Guider og artikler

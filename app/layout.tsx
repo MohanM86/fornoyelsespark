@@ -1,20 +1,29 @@
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { createWebSiteJsonLd } from '@/lib/seo'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: { default: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker', template: '%s | Fornøyelsespark.no' },
-  description: 'Norges mest komplette guide til fornøyelsesparker, familieparker, badeland og aktivitetsparker.',
+  title: { default: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker og familieparker', template: '%s | Fornøyelsespark.no' },
+  description: 'Norges mest komplette guide til fornøyelsesparker, familieparker, badeland og aktivitetsparker. Finn den beste parken for din familie.',
   metadataBase: new URL('https://fornoyelsespark.no'),
   alternates: { canonical: '/' },
-  openGraph: { siteName: 'Fornøyelsespark.no', locale: 'nb_NO', type: 'website' },
+  icons: { icon: '/favicon.svg' },
+  openGraph: {
+    siteName: 'Fornøyelsespark.no',
+    locale: 'nb_NO',
+    type: 'website',
+    title: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker',
+    description: 'Finn de beste fornøyelsesparkene, famileparkene og badelandene i Norge.',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="nb">
       <body className="min-h-screen antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createWebSiteJsonLd()) }} />
         <Header />
         <main className="mx-auto max-w-3xl px-4 py-6">{children}</main>
         <Footer />

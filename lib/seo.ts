@@ -26,11 +26,28 @@ export function createMetadata(opts: {
   }
 }
 
+export function createWebSiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: 'Norges mest komplette guide til fornøyelsesparker, familieparker, badeland og aktivitetsparker.',
+    inLanguage: 'nb',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  }
+}
+
 export function createParkJsonLd(park: {
   name: string
   description: string
   address?: string
   slug: string
+  featured?: boolean
 }) {
   return {
     '@context': 'https://schema.org',
@@ -42,7 +59,42 @@ export function createParkJsonLd(park: {
   }
 }
 
+export function createLocalBusinessJsonLd(biz: {
+  name: string
+  description: string
+  address: string
+  city: string
+  county: string
+  slug: string
+  category: string
+}) {
+  const typeMap: Record<string, string> = {
+    fornoyelsesparker: 'AmusementPark',
+    opplevelsesparker: 'EntertainmentBusiness',
+    aktivitetsparker: 'SportsActivityLocation',
+    dyrepark: 'Zoo',
+    familieparker: 'AmusementPark',
+    badeland: 'SportsActivityLocation',
+    vannparker: 'SportsActivityLocation',
+  }
+  return {
+    '@context': 'https://schema.org',
+    '@type': typeMap[biz.category] || 'LocalBusiness',
+    name: biz.name,
+    description: biz.description,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: biz.address,
+      addressLocality: biz.city,
+      addressRegion: biz.county,
+      addressCountry: 'NO',
+    },
+    url: `${SITE_URL}/park/${biz.slug}`,
+  }
+}
+
 export function createFaqJsonLd(faq: { question: string; answer: string }[]) {
+  if (!faq || faq.length === 0) return null
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

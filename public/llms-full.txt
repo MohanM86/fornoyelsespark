@@ -1,0 +1,229 @@
+# Fornøyelsespark.no – Komplett entitetsoversikt
+
+> Denne filen inneholder alle entiteter og relasjoner på fornoyelsespark.no for AI-indeksering.
+
+## Fremhevede parker
+
+### TusenFryd
+- Sted: Vinterbro
+- Norges største fornøyelsespark med over 30 attraksjoner, berg-og-dal-baner og familieområder. Ligger sør for Oslo.
+
+### Hunderfossen Eventyrpark
+- Sted: Lillehammer
+- Norges mest kjente familiepark med eventyrfigurer, trollslottet og interaktive opplevelser. Ligger ved Lillehammer.
+
+### Kongeparken
+- Sted: Ålgård
+- Sør-Vestlandets største familiepark med berg-og-dal-bane, vannattraksjoner og Kongen & Dronninga-området for de minste.
+
+### Dyreparken i Kristiansand
+- Sted: Kristiansand
+- Norges mest besøkte familiepark med dyrehage, Kardemomme by, Kaptein Sabeltanns Verden og badeland.
+
+### Badelandet i Bergen
+- Sted: Bergen
+- Bergens største badeland med vannrutsjebaner, bølgebasseng og velværeavdeling. Et populært helårstilbud for familier.
+
+### Nordlandsbadet
+- Sted: Bodø
+- Nord-Norges største badeland med tropisk badeavdeling, vannrutsjebaner og et bredt velværetilbud.
+
+### Leos Lekeland Oslo
+- Sted: Oslo
+- Stort innendørs lekeland i Oslo med klatrevegger, trampoliner, ballrom og aktiviteter for barn i alle aldre.
+
+### Lilleputthammer
+- Sted: Lillehammer
+- Sjarmerende miniatyrpark ved Lillehammer med Nils Holgerssons Eventyrreise, sirkus og aktiviteter for de yngste barna.
+
+### Namsskogan Familiepark
+- Sted: Namsskogan
+- Nordlig familiepark med nordiske rovdyr, lekeplasser og naturopplevelser midt i Namdalen.
+
+### Aquarama Bad
+- Sted: Kristiansand
+- Moderne badeanlegg i Kristiansand med vannrutsjebaner, stupetårn, 50-meters basseng og velværeavdeling.
+
+### Badelandet i Dyreparken
+- Sted: Kristiansand
+- Badeland inne i Dyreparken i Kristiansand med vannrutsjebaner og barnebassenger.
+
+### Bø Sommarland
+- Sted: Bø i Telemark
+- Norges største vannpark med over 100 vannattraksjoner, badeland og fornøyelsespark-attraksjoner. Ligger i Bø i Telemark.
+
+### Oslo Vinterpark Tryvann
+- Sted: Oslo
+- Oslos nærmeste alpinanlegg med skibakker, akebakker og sommeraktiviteter. Ligger i Nordmarka.
+
+### Atlanterhavsparken
+- Sted: Ålesund
+- Norges største saltvannsakvarium med havdyr, sjøfugler og undervannsopplevelser i Ålesund.
+
+### Lund Aktivitetspark
+- Sted: Kristiansand
+- Moderne aktivitetspark i Kristiansand med klatrepark, trampoliner og utendørsaktiviteter for hele familien.
+
+### Norsk Folkemuseum
+- Sted: Oslo
+- Friluftsmuseum på Bygdøy med over 160 historiske bygninger, stavkirke og levende kulturformidling.
+
+### Bergen Akvariet
+- Sted: Bergen
+- Populært akvarium i Bergen sentrum med sjødyr, pingviner, sjøløver og tropisk avdeling.
+
+### Langedrag Naturpark
+- Sted: Nore og Uvdal
+- Naturpark i Numedal med ulver, rovdyr, gårdsdyr og unike dyreopplevelser på 1000 meters høyde.
+
+### Barnas Lekeland Trondheim
+- Sted: Trondheim
+- Innendørs lekeland i Trondheim med klatrekonstruksjoner, trampoliner og aktiviteter for barn.
+
+### Polaria
+- Sted: Tromsø
+- Arktisk opplevelsessenter i Tromsø med akvarium, arktiske dyr og utstillinger om polarområdene.
+
+## Alle registrerte aktører
+
+Totalt 282 aktører registrert.
+
+### Aktivitetsparker (81 aktører)
+
+- Berlevåg Jeger- Og Fiskerforening, Berlevåg, Berlevåg
+- Bowling 1 Gjøvik As, Gjøvik, Gjøvik
+- Bowling 1 Vestkanten As, Loddefjord, Bergen
+- Bowlit As, Stord, Stord
+- Centrum Bowling As, Trondheim, Trondheim
+- Bowling 1 Kongsvinger As, Kongsvinger, Kongsvinger
+- Brattvåg Bowling As, Brattvåg, Haram
+- Bulder Lekeland As, Arendal, Arendal
+- Fjordsauna As, Aurland, Aurland
+- Full Rulle Golf & Bowling As, Sortland, Sortland
+- Førde Bowlinghall As, Førde, Sunnfjord
+- Harstad Lekeland As, Harstad, Harstad
+- Helgøya Klatrepark As, Nes På Hedmarken, Ringsaker
+- Hitrahallen Sa, Hitra, Hitra
+- Høyt Og Lavt Aktivitets Konsepter As, Steinsholt, Larvik
+- Inatur Norge As, Namsos, Namsos
+- Kambo Marina As, Moss, Moss
+- Lekeland 1 Gjøvik As, Hunndalen, Gjøvik
+- Levanger Bowling As, Levanger, Levanger
+- Ligo Filmgalleriet Skåregaten As, Haugesund, Haugesund
+- Lucky Strike Bowlingsenter As, Lyngdal, Lyngdal
+- Miklagard Golfdrift As, Kløfta, Ullensaker
+- Nye Rena Bowling As, Rena, Åmot
+- Playworld Sørlandet As, Oslo, Oslo
+- Sjøsenteret Nesodden As, Nesoddtangen, Nesodden
+- Skattøra Marina As, Tromsø, Tromsø
+- Skyland Lørenskog As, Lørenskog, Lørenskog
+- Solli Bowling Oslo As, Oslo, Oslo
+- Sportsparken Vegsund As, Ålesund, Ålesund
+- Svolvær Bowlingsenter As, Svolvær, Vågan
+- ... og 51 flere
+
+### Dyrepark (11 aktører)
+
+- Fjellstyra På Hardangervidda As, Ulvik, Ulvik
+- Polar Park As, Bardu, Bardu
+- Stiftelsen Akvariet I Bergen, Bergen, Bergen
+- Stiftelsen Preikestolen, Jørpeland, Strand
+- Stiftelsen Risør Akvarium, Risør, Risør
+- Drøbak Akvarium, Oslofjorden Marinbiologiske Senter Sti, Drøbak, Frogn
+- Opplev Tropisk As, Sundebru, Gjerstad
+- Oslo Reptilpark As, Oslo, Oslo
+- Bjørneparken As, Flå, Flå
+- Kristiansand Dyrepark As, Kristiansand S, Kristiansand
+- Tangen Dyrepark As, Tangen, Stange
+
+### Fornoyelsesparker (59 aktører)
+
+- Amigos As, Sem, Tønsberg
+- Activate Games Oslo As, Trondheim, Trondheim
+- Astro Senteret As, Egersund, Eigersund
+- Epic Digernes As, Skodje, Ålesund
+- Eventutstyr & Eventtjenester As, Blomsterdalen, Bergen
+- Høyt Og Lavt Klatreparker As, Steinsholt, Larvik
+- Jky As, Straume, Øygarden
+- Lekelande As, Lørenskog, Lørenskog
+- Neptun Lekeland As, Kristiansund N, Kristiansund
+- Nordic Fun Alvim As, Vollen, Asker
+- Opplevelsessenteret Østfoldbadet As, Askim, Indre Østfold
+- Røa Badeland Og Velvære As, Oslo, Oslo
+- Sjøsamisk Tun As, Russenes, Porsanger
+- Skyland Bergen As, Mathopen, Bergen
+- Skyland Ski As, Ski, Ås
+- Skyland Tønsberg As, Sem, Tønsberg
+- Styrke Holding As, Tjørvåg, Herøy
+- Vavsy As, Kristiansand S, Kristiansand
+- Yancy As, Hafrsfjord, Stavanger
+- Klatring På Grensen As, Berg I Østfold, Halden
+- Kragerøparken As, Sannidal, Kragerø
+- Lund Gruppen Holding As, Ålgård, Gjesdal
+- Lykkeland Steinkjer As, Steinkjer, Steinkjer
+- Nordisk Opplevelse As, Brekkvasselv, Namsskogan
+- Totenbadet Vestre Toten Kf, Raufoss, Vestre Toten
+- Hardangerbadet As, Øystese, Kvam
+- Orklandbadet Kf, Orkanger, Orkland
+- Playground Forus As, Stavanger, Stavanger
+- Polarbadet As, Bardufoss, Målselv
+- Rush Larvik As, Larvik, Larvik
+- ... og 29 flere
+
+### Opplevelsesparker (111 aktører)
+
+- Arctic Escape As, Tromsø, Tromsø
+- Arctic Garden As, Lødingen, Lødingen
+- Arne Brimi As, Tessanden, Vågå
+- Arnøy Brygge As, Nordarnøy, Gildeskål
+- Birdsafari As, Gjesvær, Nordkapp
+- Alta Adventure As, Alta, Alta
+- Arctic Husky As, Tromsø, Tromsø
+- Arctic Husky Travellers As, Longyearbyen, Svalbard
+- Aurora Husky As, Bardufoss, Målselv
+- Bergen By Expert As, Bergen, Bergen
+- Camp Troll As, Svensby, Lyngen
+- Cirka As, Rong, Øygarden
+- Dagali Rafting As, Dagali, Hol
+- Evasion Da, Fjerdingby, Rælingen
+- Experience Production As, Oslo, Oslo
+- Flatmoen Natur As, Alta, Alta
+- Fun Center As, Sandnes, Sandnes
+- Handyman Morten Sterri As, Oslo, Oslo
+- House Of Nerds Vulkan As, Oslo, Oslo
+- Hov Gård As, Gimsøysand, Vågan
+- Huskyfarm Innset As, Bardu, Bardu
+- Høyt Under Taket Moss As, Moss, Moss
+- Lauksund Drift As, Svolvær, Vågan
+- Lingalaks Akvasenter As, Norheimsund, Kvam
+- LYNGEN OUTDOOR EXPERIENCSES v/Tom Frode Johansen, Furuflaten, Lyngen
+- No Escape As, Bergen, Bergen
+- Norway Adventures As, Davik, Bremanger
+- Norwegian Adventure Company As, Oslo, Oslo
+- Opplev Oppdal As, Oppdal, Oppdal
+- PARKEN GÅRD HUSKY TOURS Marianne Skjøthaug, Langfjordbotn, Alta
+- ... og 81 flere
+
+## Byer
+
+- Oslo
+- Bergen
+- Trondheim
+- Stavanger
+- Kristiansand
+- Lillehammer
+- Tromsø
+- Ålesund
+- Bodø
+- Drammen
+- Bø i Telemark
+
+## Kategorier
+
+- Fornøyelsesparker
+- Familieparker
+- Badeland
+- Vannparker
+- Aktivitetsparker
+- Opplevelsesparker
+- Dyreparker

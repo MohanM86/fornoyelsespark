@@ -17,6 +17,8 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(faq)) }} />
 
+      <h1 className="text-[22px] font-bold mb-3" style={{ color: 'var(--ink)' }}>Beste fornøyelsesparker i Norge</h1>
+
       <p className="text-[15px] leading-relaxed mb-6" style={{ color: 'var(--ink2)' }}>
         Norge har flere populære fornøyelsesparker for familier. Her er en oversikt over de beste
         alternativene, med informasjon om alderstilpasning, priser og beliggenhet.
