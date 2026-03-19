@@ -2,58 +2,44 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="mt-20 border-t" style={{ borderColor: 'var(--border)', background: 'var(--surface-raised)' }}>
-      <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+    <footer className="mt-16" style={{ borderTop: '1px solid var(--border)', background: 'var(--cream)' }}>
+      <div className="mx-auto max-w-4xl px-5 py-10">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Kategorier</p>
-            <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              <li><Link href="/kategori/fornoyelsesparker" className="hover:text-[var(--accent)] transition-colors">Fornøyelsesparker</Link></li>
-              <li><Link href="/kategori/familieparker" className="hover:text-[var(--accent)] transition-colors">Familieparker</Link></li>
-              <li><Link href="/kategori/badeland" className="hover:text-[var(--accent)] transition-colors">Badeland</Link></li>
-              <li><Link href="/kategori/vannparker" className="hover:text-[var(--accent)] transition-colors">Vannparker</Link></li>
-              <li><Link href="/kategori/aktivitetsparker" className="hover:text-[var(--accent)] transition-colors">Aktivitetsparker</Link></li>
-              <li><Link href="/kategori/opplevelsesparker" className="hover:text-[var(--accent)] transition-colors">Opplevelsesparker</Link></li>
-              <li><Link href="/kategori/dyrepark" className="hover:text-[var(--accent)] transition-colors">Dyreparker</Link></li>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--ink-muted)' }}>Kategorier</p>
+            <ul className="space-y-2 text-sm" style={{ color: 'var(--ink-light)' }}>
+              {['fornoyelsesparker','familieparker','badeland','vannparker','aktivitetsparker','opplevelsesparker','dyrepark'].map(s=>(
+                <li key={s}><Link href={`/kategori/${s}`} className="hover:underline capitalize">{s.replace(/-/g,' ')}</Link></li>
+              ))}
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Byer</p>
-            <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              <li><Link href="/oslo" className="hover:text-[var(--accent)] transition-colors">Oslo</Link></li>
-              <li><Link href="/bergen" className="hover:text-[var(--accent)] transition-colors">Bergen</Link></li>
-              <li><Link href="/trondheim" className="hover:text-[var(--accent)] transition-colors">Trondheim</Link></li>
-              <li><Link href="/stavanger" className="hover:text-[var(--accent)] transition-colors">Stavanger</Link></li>
-              <li><Link href="/kristiansand" className="hover:text-[var(--accent)] transition-colors">Kristiansand</Link></li>
-              <li><Link href="/lillehammer" className="hover:text-[var(--accent)] transition-colors">Lillehammer</Link></li>
-              <li><Link href="/tromso" className="hover:text-[var(--accent)] transition-colors">Tromsø</Link></li>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--ink-muted)' }}>Byer</p>
+            <ul className="space-y-2 text-sm" style={{ color: 'var(--ink-light)' }}>
+              {[{n:'Oslo',s:'oslo'},{n:'Bergen',s:'bergen'},{n:'Trondheim',s:'trondheim'},{n:'Stavanger',s:'stavanger'},{n:'Kristiansand',s:'kristiansand'},{n:'Lillehammer',s:'lillehammer'},{n:'Tromsø',s:'tromso'}].map(c=>(
+                <li key={c.s}><Link href={`/${c.s}`} className="hover:underline">{c.n}</Link></li>
+              ))}
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Guider</p>
-            <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              <li><Link href="/guide/beste-fornoyelsesparker-i-norge" className="hover:text-[var(--accent)] transition-colors">Beste parker i Norge</Link></li>
-              <li><Link href="/guide/fornoyelsesparker-i-sverige" className="hover:text-[var(--accent)] transition-colors">Parker i Sverige</Link></li>
-              <li><Link href="/guide/fornoyelsesparker-i-danmark" className="hover:text-[var(--accent)] transition-colors">Parker i Danmark</Link></li>
-              <li><Link href="/guide/fornoyelsesparker-for-barn" className="hover:text-[var(--accent)] transition-colors">Parker for barn</Link></li>
-              <li><Link href="/guide/badeland-i-norge" className="hover:text-[var(--accent)] transition-colors">Badeland i Norge</Link></li>
-              <li><Link href="/guide/familieparker-i-norge" className="hover:text-[var(--accent)] transition-colors">Familieparker i Norge</Link></li>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--ink-muted)' }}>Guider</p>
+            <ul className="space-y-2 text-sm" style={{ color: 'var(--ink-light)' }}>
+              {[{n:'Beste parker',s:'beste-fornoyelsesparker-i-norge'},{n:'Parker i Sverige',s:'fornoyelsesparker-i-sverige'},{n:'Parker i Danmark',s:'fornoyelsesparker-i-danmark'},{n:'Parker for barn',s:'fornoyelsesparker-for-barn'},{n:'Badeland',s:'badeland-i-norge'},{n:'Familieparker',s:'familieparker-i-norge'}].map(g=>(
+                <li key={g.s}><Link href={`/guide/${g.s}`} className="hover:underline">{g.n}</Link></li>
+              ))}
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Populære parker</p>
-            <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              <li><Link href="/park/tusenfryd" className="hover:text-[var(--accent)] transition-colors">TusenFryd</Link></li>
-              <li><Link href="/park/dyreparken-kristiansand" className="hover:text-[var(--accent)] transition-colors">Dyreparken</Link></li>
-              <li><Link href="/park/hunderfossen" className="hover:text-[var(--accent)] transition-colors">Hunderfossen</Link></li>
-              <li><Link href="/park/kongeparken" className="hover:text-[var(--accent)] transition-colors">Kongeparken</Link></li>
-              <li><Link href="/park/bo-sommarland" className="hover:text-[var(--accent)] transition-colors">Bø Sommarland</Link></li>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--ink-muted)' }}>Populære</p>
+            <ul className="space-y-2 text-sm" style={{ color: 'var(--ink-light)' }}>
+              {[{n:'TusenFryd',s:'tusenfryd'},{n:'Dyreparken',s:'dyreparken-kristiansand'},{n:'Hunderfossen',s:'hunderfossen'},{n:'Kongeparken',s:'kongeparken'},{n:'Bø Sommarland',s:'bo-sommarland'}].map(p=>(
+                <li key={p.s}><Link href={`/park/${p.s}`} className="hover:underline">{p.n}</Link></li>
+              ))}
             </ul>
           </div>
         </div>
-        <div className="mt-10 pt-6 border-t text-center text-xs" style={{ borderColor: 'var(--border)', color: 'var(--text-tertiary)' }}>
-          <p>© {new Date().getFullYear()} Fornøyelsespark.no – Norges guide til fornøyelsesparker, familieparker og badeland.</p>
-          <p className="mt-1">Sjekk alltid parkenes egne nettsider for oppdaterte priser og åpningstider.</p>
+        <div className="mt-8 pt-6 text-center text-xs" style={{ borderTop: '1px solid var(--border)', color: 'var(--ink-faint)' }}>
+          <p>© {new Date().getFullYear()} Fornøyelsespark.no – Norges guide til fornøyelsesparker og badeland.</p>
         </div>
       </div>
     </footer>

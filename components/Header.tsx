@@ -1,9 +1,8 @@
 'use client'
-
 import Link from 'next/link'
 import { useState } from 'react'
 
-const navItems = [
+const nav = [
   { label: 'Parker', href: '/kategori/fornoyelsesparker' },
   { label: 'Badeland', href: '/kategori/badeland' },
   { label: 'Byer', href: '/oslo' },
@@ -11,89 +10,43 @@ const navItems = [
 ]
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false)
-
+  const [open, setOpen] = useState(false)
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md" style={{ borderColor: 'var(--border)' }}>
-      <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-3 sm:px-6">
-        {/* Logo */}
+    <header style={{ borderBottom: '1px solid var(--border)', background: 'var(--cream)' }}>
+      <div className="mx-auto flex max-w-4xl items-center gap-4 px-5 py-3">
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: 'var(--accent)' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <span className="text-base font-semibold tracking-tight hidden sm:inline" style={{ color: 'var(--text-primary)' }}>
-            Fornøyelsespark<span style={{ color: 'var(--accent)' }}>.no</span>
+          <span className="text-base font-bold" style={{ color: 'var(--ink)' }}>
+            Fornøyelsespark<span style={{ color: 'var(--green)' }}>.no</span>
           </span>
         </Link>
-
-        {/* Search bar */}
-        <div className="flex-1 mx-2">
-          <div
-            className="flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-all"
-            style={{
-              background: 'var(--surface-sunken)',
-              border: '0.5px solid var(--border)',
-              color: 'var(--text-tertiary)',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <span className="hidden sm:inline">Søk etter parker, byer eller opplevelser...</span>
-            <span className="sm:hidden">Søk...</span>
-          </div>
-        </div>
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-3 py-1.5 text-sm font-medium transition-colors hover:bg-[var(--surface-sunken)]"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              {item.label}
+        <div className="flex-1" />
+        <nav className="hidden sm:flex items-center gap-1">
+          {nav.map((n) => (
+            <Link key={n.href} href={n.href}
+              className="rounded-full px-3.5 py-1.5 text-sm transition-colors"
+              style={{ color: 'var(--ink-light)' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--cream-dark)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+              {n.label}
             </Link>
           ))}
         </nav>
-
-        {/* Mobile menu toggle */}
-        <button
-          className="md:hidden p-2 rounded-lg"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Meny"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" strokeWidth="2" strokeLinecap="round">
-            {menuOpen ? (
-              <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>
-            ) : (
-              <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>
-            )}
+        <button className="sm:hidden p-1.5" onClick={() => setOpen(!open)} aria-label="Meny">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink-muted)" strokeWidth="2" strokeLinecap="round">
+            {open ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></> : <><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></>}
           </svg>
         </button>
       </div>
-
-      {/* Mobile nav */}
-      {menuOpen && (
-        <nav className="md:hidden border-t px-4 py-3 flex flex-wrap gap-2" style={{ borderColor: 'var(--border)', background: 'var(--surface-raised)' }}>
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-4 py-2 text-sm font-medium"
-              style={{ background: 'var(--surface-sunken)', color: 'var(--text-primary)' }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
+      {open && (
+        <div className="sm:hidden flex flex-wrap gap-2 px-5 pb-3">
+          {nav.map((n) => (
+            <Link key={n.href} href={n.href} onClick={() => setOpen(false)}
+              className="rounded-full px-4 py-2 text-sm"
+              style={{ background: 'var(--cream-dark)', color: 'var(--ink-light)' }}>
+              {n.label}
             </Link>
           ))}
-        </nav>
+        </div>
       )}
     </header>
   )

@@ -4,23 +4,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        accent: { DEFAULT: 'var(--accent)', light: 'var(--accent-light)', dark: 'var(--accent-dark)' },
-        surface: { DEFAULT: 'var(--surface)', raised: 'var(--surface-raised)', sunken: 'var(--surface-sunken)' },
-        txt: { primary: 'var(--text-primary)', secondary: 'var(--text-secondary)', tertiary: 'var(--text-tertiary)' },
-        brd: { DEFAULT: 'var(--border)', light: 'var(--border-light)' },
-      },
-      borderRadius: {
-        sm: 'var(--radius-sm)',
-        md: 'var(--radius-md)',
-        lg: 'var(--radius-lg)',
-        xl: 'var(--radius-xl)',
+        cream: { DEFAULT: '#FAF8F3', dark: '#F3F0E8' },
+        ink: { DEFAULT: '#1A1A1A', light: '#4A4A4A', muted: '#8A8A80', faint: '#B8B8AE' },
+        g: { green: '#34A853', red: '#EA4335', yellow: '#FBBC04', blue: '#4285F4' },
       },
       fontFamily: {
-        sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Inter"', 'system-ui', 'sans-serif'],
+        sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
-      animation: {
-        'fade-up': 'fadeUp 0.4s ease both',
+      borderRadius: {
+        card: '12px',
+        pill: '9999px',
       },
     },
   },
