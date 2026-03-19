@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Section, FAQ, Breadcrumbs, RelatedLinks, ParkCard, ParkGrid, ChatInput } from '@/components/UI'
 import { getGuideBySlug, getAllGuides, getParkBySlug } from '@/lib/helpers'
-import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
+import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd, createArticleJsonLd } from '@/lib/seo'
 
 type Props = { params: { slug: string } }
 export function generateStaticParams() { return getAllGuides().map(g => ({ slug: g.slug })) }
@@ -18,6 +18,7 @@ export default function GuidePage({ params }: Props) {
     <>
       {guide.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(guide.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd([{ name: 'Forside', url: '/' }, { name: 'Guider', url: '/guide/beste-fornoyelsesparker-i-norge' }, { name: guide.title, url: `/guide/${guide.slug}` }])) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createArticleJsonLd(guide)) }} />
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: 'Guider', href: '/guide/beste-fornoyelsesparker-i-norge' }, { label: guide.title }]} />
       <h1 className="text-xl font-bold mb-2" style={{ color: 'var(--ink)' }}>{guide.title}</h1>
       <p className="text-[14px] leading-relaxed mb-6" style={{ color: 'var(--ink2)' }}>{guide.intro}</p>

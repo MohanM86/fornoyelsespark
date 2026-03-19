@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { Section, CompareCard, ParkGrid, ActionBtn, InsightPanel, DayPlan, SourceChips, FollowUpChips, ChatInput, FAQ, RelatedLinks, Chip, ChipRow, GuideLink, CityRow } from '@/components/UI'
-import { getMainCities, getAllFylker, getAllCategories, getAllGuides, getParksByCity, getParksByFylke } from '@/lib/helpers'
-import { createFaqJsonLd } from '@/lib/seo'
+import { Section, CompareCard, ParkGrid, ParkCard, ActionBtn, InsightPanel, DayPlan, SourceChips, FollowUpChips, ChatInput, FAQ, RelatedLinks, Chip, ChipRow, GuideLink, CityRow } from '@/components/UI'
+import { getMainCities, getAllFylker, getAllCategories, getAllGuides, getParksByCity, getParksByFylke, getFeaturedParks } from '@/lib/helpers'
+import { createFaqJsonLd, createItemListJsonLd } from '@/lib/seo'
 
 export const metadata = { title: 'Beste fornøyelsesparker i Norge – Komplett guide og oversikt', description: 'Finn de beste fornøyelsesparkene i Norge. Sammenlign parker, les guider og planlegg familieturen.' }
 
@@ -13,9 +13,13 @@ const faq = [
 ]
 
 export default function HomePage() {
+  const featured = getFeaturedParks()
+  const featuredListItems = featured.map((p, i) => ({ name: p.name, url: `/park/${p.slug}`, position: i + 1 }))
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(faq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createItemListJsonLd(featuredListItems)) }} />
 
       <h1 className="text-[22px] font-bold mb-3" style={{ color: 'var(--ink)' }}>Beste fornøyelsesparker i Norge</h1>
 
@@ -74,6 +78,16 @@ export default function HomePage() {
         <FollowUpChips label="Spør videre" chips={['Hva om det regner?', 'Vis overnatting i nærheten', 'Sammenlign med Dyreparken', 'Book billetter nå']} />
       </div>
 
+      {/* Featured parks – direct links for better crawl depth */}
+      <Section title="Anbefalte parker">
+        <ParkGrid>
+          {featured.map(p => (
+            <ParkCard key={p.id} name={p.name} href={`/park/${p.slug}`} description={p.shortDescription}
+              city={p.city} county={p.county} category={p.category} featured={p.featured} audience={p.audience} />
+          ))}
+        </ParkGrid>
+      </Section>
+
       <Section title="Utforsk etter type">
         <ChipRow>{getAllCategories().map(c => <Chip key={c.slug} label={c.name} href={`/kategori/${c.slug}`} />)}</ChipRow>
       </Section>
@@ -102,6 +116,21 @@ export default function HomePage() {
       </Section>
 
       <FAQ items={faq} />
+
+      {/* Noscript fallback for search – gives Google crawlable links */}
+      <noscript>
+        <Section title="Alle kategorier">
+          <ul className="space-y-1 text-[13px]" style={{ color: 'var(--ink2)' }}>
+            {getAllCategories().map(c => <li key={c.slug}><a href={`/kategori/${c.slug}`}>{c.name}</a></li>)}
+          </ul>
+        </Section>
+        <Section title="Alle byer">
+          <ul className="space-y-1 text-[13px]" style={{ color: 'var(--ink2)' }}>
+            {getMainCities().map(c => <li key={c.slug}><a href={`/${c.slug}`}>{c.name}</a></li>)}
+          </ul>
+        </Section>
+      </noscript>
+
       <div className="mt-8"><ChatInput placeholder="Søk etter fornøyelsesparker..." /></div>
     </>
   )

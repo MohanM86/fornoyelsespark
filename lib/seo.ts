@@ -13,7 +13,10 @@ export function createMetadata(opts: {
   return {
     title: opts.title,
     description: opts.description,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: { 'nb-NO': url },
+    },
     openGraph: {
       title: opts.title,
       description: opts.description,
@@ -34,6 +37,11 @@ export function createWebSiteJsonLd() {
     url: SITE_URL,
     description: 'Norges mest komplette guide til fornøyelsesparker, familieparker, badeland og aktivitetsparker.',
     inLanguage: 'nb',
+    areaServed: {
+      '@type': 'Country',
+      name: 'Norway',
+      sameAs: 'https://www.wikidata.org/wiki/Q20',
+    },
     potentialAction: {
       '@type': 'SearchAction',
       target: `${SITE_URL}/?q={search_term_string}`,
@@ -118,6 +126,54 @@ export function createBreadcrumbJsonLd(items: { name: string; url: string }[]) {
       position: index + 1,
       name: item.name,
       item: `${SITE_URL}${item.url}`,
+    })),
+  }
+}
+
+/** Article JSON-LD for guide pages */
+export function createArticleJsonLd(guide: {
+  title: string
+  intro: string
+  slug: string
+  sections: { heading: string; content: string }[]
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.title,
+    description: guide.intro,
+    url: `${SITE_URL}/guide/${guide.slug}`,
+    inLanguage: 'nb',
+    datePublished: '2025-06-01T00:00:00+02:00',
+    dateModified: new Date().toISOString(),
+    author: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/guide/${guide.slug}`,
+    },
+  }
+}
+
+/** ItemList JSON-LD for category and city listing pages */
+export function createItemListJsonLd(items: { name: string; url: string; position: number }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    numberOfItems: items.length,
+    itemListElement: items.map((item) => ({
+      '@type': 'ListItem',
+      position: item.position,
+      name: item.name,
+      url: `${SITE_URL}${item.url}`,
     })),
   }
 }

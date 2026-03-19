@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Section, ParkCard, ParkGrid, FAQ, Breadcrumbs, RelatedLinks, Chip, ChipRow, GuideLink, ChatInput } from '@/components/UI'
 import { getCityBySlug, getParksByCity, getAllCities, getMainCities, getAllCategories, getAllGuides, getAllFylker } from '@/lib/helpers'
-import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
+import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd, createItemListJsonLd } from '@/lib/seo'
 
 type Props = { params: { city: string } }
 export function generateStaticParams() { return getAllCities().map(c => ({ city: c.slug })) }
@@ -16,6 +16,7 @@ export default function CityPage({ params }: Props) {
   const fylke = getAllFylker().find(f => f.name === city.county)
   const otherCities = getMainCities().filter(c => c.slug !== city.slug).slice(0, 6)
   const guides = getAllGuides().slice(0, 3)
+  const itemListItems = parks.map((p, i) => ({ name: p.name, url: `/park/${p.slug}`, position: i + 1 }))
 
   const bc = [
     { name: 'Forside', url: '/' },
@@ -27,6 +28,7 @@ export default function CityPage({ params }: Props) {
     <>
       {city.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(city.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(bc)) }} />
+      {itemListItems.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createItemListJsonLd(itemListItems)) }} />}
       <Breadcrumbs items={[
         { label: 'Forside', href: '/' },
         ...(fylke ? [{ label: fylke.name, href: `/fylke/${fylke.slug}` }] : []),

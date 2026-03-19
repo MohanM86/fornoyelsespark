@@ -8,7 +8,10 @@ export const metadata: Metadata = {
   title: { default: 'Fornøyelsespark.no – Norges guide til fornøyelsesparker og familieparker', template: '%s | Fornøyelsespark.no' },
   description: 'Norges mest komplette guide til fornøyelsesparker, familieparker, badeland og aktivitetsparker. Finn den beste parken for din familie.',
   metadataBase: new URL('https://fornoyelsespark.no'),
-  alternates: { canonical: '/' },
+  alternates: {
+    canonical: '/',
+    languages: { 'nb-NO': '/' },
+  },
   icons: { icon: '/favicon.svg' },
   openGraph: {
     siteName: 'Fornøyelsespark.no',
@@ -24,11 +27,18 @@ export const metadata: Metadata = {
     description: 'Finn de beste fornøyelsesparkene, famileparkene og badelandene i Norge.',
     images: ['/og-image.png'],
   },
+  other: {
+    'content-language': 'nb',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="nb">
+      <head>
+        <link rel="alternate" hrefLang="nb-NO" href="https://fornoyelsespark.no" />
+        <link rel="alternate" hrefLang="x-default" href="https://fornoyelsespark.no" />
+      </head>
       <body className="min-h-screen antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createWebSiteJsonLd()) }} />
         <Header />

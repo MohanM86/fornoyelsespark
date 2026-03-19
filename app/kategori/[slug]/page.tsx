@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Section, ParkCard, ParkGrid, FAQ, Breadcrumbs, RelatedLinks, GuideLink, ChatInput } from '@/components/UI'
 import { getCategoryBySlug, getParksByCategory, getAllCategories, getAllCities, getAllGuides } from '@/lib/helpers'
-import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
+import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd, createItemListJsonLd } from '@/lib/seo'
 import { ParkCategory } from '@/lib/types'
 
 type Props = { params: { slug: string } }
@@ -16,10 +16,12 @@ export default function CategoryPage({ params }: Props) {
   const parks = getParksByCategory(cat.slug as ParkCategory)
   const others = getAllCategories().filter(c => c.slug !== cat.slug)
   const guides = getAllGuides().filter(g => g.slug.includes(cat.slug) || g.relatedParks.some(rp => parks.some(p => p.slug === rp)))
+  const itemListItems = parks.map((p, i) => ({ name: p.name, url: `/park/${p.slug}`, position: i + 1 }))
   return (
     <>
       {cat.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(cat.faq)) }} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd([{ name: 'Forside', url: '/' }, { name: cat.name, url: `/kategori/${cat.slug}` }])) }} />
+      {itemListItems.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createItemListJsonLd(itemListItems)) }} />}
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: cat.name }]} />
       <h1 className="text-xl font-bold mb-2" style={{ color: 'var(--ink)' }}>{cat.name} i Norge</h1>
       <p className="text-[14px] leading-relaxed mb-4" style={{ color: 'var(--ink2)' }}>{cat.description}</p>

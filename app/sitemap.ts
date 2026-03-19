@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE}/park/${p.slug}`,
     lastModified: now,
     changeFrequency: 'monthly',
-    priority: 0.7,
+    priority: p.featured ? 0.8 : 0.7,
   }))
 
   const guidePages: MetadataRoute.Sitemap = getAllGuides().map(g => ({

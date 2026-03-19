@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Section, ParkCard, ParkGrid, FAQ, Breadcrumbs, RelatedLinks, Chip, ChipRow, ChatInput, CityRow } from '@/components/UI'
 import { getFylkeBySlug, getParksByFylke, getAllFylker, getAllCities, getAllCategories } from '@/lib/helpers'
-import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd } from '@/lib/seo'
+import { createMetadata, createFaqJsonLd, createBreadcrumbJsonLd, createItemListJsonLd } from '@/lib/seo'
 
 type Props = { params: { slug: string } }
 
@@ -26,6 +26,7 @@ export default function FylkePage({ params }: Props) {
 
   const parks = getParksByFylke(fylke.slug)
   const otherFylker = getAllFylker().filter(f => f.slug !== fylke.slug)
+  const itemListItems = parks.map((p, i) => ({ name: p.name, url: `/park/${p.slug}`, position: i + 1 }))
 
   // Group parks by kommune
   const byKommune: Record<string, typeof parks> = {}
@@ -48,6 +49,7 @@ export default function FylkePage({ params }: Props) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createFaqJsonLd(fylke.faq)) }} />
       )}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createBreadcrumbJsonLd(bc)) }} />
+      {itemListItems.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(createItemListJsonLd(itemListItems)) }} />}
 
       <Breadcrumbs items={[{ label: 'Forside', href: '/' }, { label: 'Fylker' }, { label: fylke.name }]} />
 
