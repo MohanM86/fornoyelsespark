@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Section, CompareCard, ParkGrid, ActionBtn, InsightPanel, DayPlan, SourceChips, FollowUpChips, ChatInput, FAQ, RelatedLinks, Chip, ChipRow, GuideLink, CityRow } from '@/components/UI'
-import { getAllCities, getAllCategories, getAllGuides, getParksByCity } from '@/lib/helpers'
+import { getMainCities, getAllFylker, getAllCategories, getAllGuides, getParksByCity, getParksByFylke } from '@/lib/helpers'
 import { createFaqJsonLd } from '@/lib/seo'
 
 export const metadata = { title: 'Beste fornøyelsesparker i Norge – Komplett guide og oversikt', description: 'Finn de beste fornøyelsesparkene i Norge. Sammenlign parker, les guider og planlegg familieturen.' }
@@ -79,7 +79,20 @@ export default function HomePage() {
       </Section>
 
       <Section title="Parker etter by">
-        {getAllCities().map(c => <CityRow key={c.slug} name={c.name} href={`/${c.slug}`} count={getParksByCity(c.slug).length} />)}
+        {getMainCities().map(c => <CityRow key={c.slug} name={c.name} href={`/${c.slug}`} count={getParksByCity(c.slug).length} />)}
+      </Section>
+
+      <Section title="Parker etter fylke">
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {getAllFylker().map(f => (
+            <Link key={f.slug} href={`/fylke/${f.slug}`}
+              className="flex items-center justify-between rounded-xl p-3 text-[13px]"
+              style={{ background: 'var(--card)', border: '1px solid var(--brd)' }}>
+              <span className="font-semibold" style={{ color: 'var(--ink)' }}>{f.name}</span>
+              <span style={{ color: 'var(--ink3)' }}>{getParksByFylke(f.slug).length} aktører ›</span>
+            </Link>
+          ))}
+        </div>
       </Section>
 
       <Section title="Guider">

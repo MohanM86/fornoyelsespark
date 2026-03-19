@@ -3,8 +3,8 @@ import Link from 'next/link'
 const cols = [
   { t: 'Kategorier', items: [{n:'Fornøyelsesparker',h:'/kategori/fornoyelsesparker'},{n:'Familieparker',h:'/kategori/familieparker'},{n:'Badeland',h:'/kategori/badeland'},{n:'Vannparker',h:'/kategori/vannparker'},{n:'Aktivitetsparker',h:'/kategori/aktivitetsparker'},{n:'Opplevelsesparker',h:'/kategori/opplevelsesparker'},{n:'Dyreparker',h:'/kategori/dyrepark'}] },
   { t: 'Byer', items: [{n:'Oslo',h:'/oslo'},{n:'Bergen',h:'/bergen'},{n:'Trondheim',h:'/trondheim'},{n:'Stavanger',h:'/stavanger'},{n:'Kristiansand',h:'/kristiansand'},{n:'Lillehammer',h:'/lillehammer'},{n:'Tromsø',h:'/tromso'}] },
+  { t: 'Fylker', items: [{n:'Vestland',h:'/fylke/vestland'},{n:'Troms',h:'/fylke/troms'},{n:'Rogaland',h:'/fylke/rogaland'},{n:'Innlandet',h:'/fylke/innlandet'},{n:'Trøndelag',h:'/fylke/troendelag'},{n:'Akershus',h:'/fylke/akershus'},{n:'Agder',h:'/fylke/agder'},{n:'Nordland',h:'/fylke/nordland'}] },
   { t: 'Guider', items: [{n:'Beste parker',h:'/guide/beste-fornoyelsesparker-i-norge'},{n:'Parker i Sverige',h:'/guide/fornoyelsesparker-i-sverige'},{n:'Parker i Danmark',h:'/guide/fornoyelsesparker-i-danmark'},{n:'For barn',h:'/guide/fornoyelsesparker-for-barn'},{n:'Badeland',h:'/guide/badeland-i-norge'},{n:'Familieparker',h:'/guide/familieparker-i-norge'}] },
-  { t: 'Populære', items: [{n:'TusenFryd',h:'/park/tusenfryd'},{n:'Dyreparken',h:'/park/dyreparken-kristiansand'},{n:'Hunderfossen',h:'/park/hunderfossen'},{n:'Kongeparken',h:'/park/kongeparken'},{n:'Bø Sommarland',h:'/park/bo-sommarland'}] },
 ]
 
 export default function Footer() {
