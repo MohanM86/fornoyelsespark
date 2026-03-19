@@ -40,6 +40,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://fornoyelsespark.no/sitemap.xml',
+    sitemap: 'https://fornøyelsespark.no/sitemap.xml',
   }
 }

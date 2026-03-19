@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllParks, getAllCities, getAllCategories, getAllGuides, getAllFylker } from '@/lib/helpers'
 
-const BASE = 'https://fornoyelsespark.no'
+const BASE = 'https://fornøyelsespark.no'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString()
